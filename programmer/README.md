@@ -33,9 +33,9 @@ Components:
 <img src="https://raw.githubusercontent.com/amirbawab/AVR/master/programmer/images/connections.jpg"/>  
 
 ### Compile and upload
-To compile your C program and upload the generated hex to the ATmega328p, use the `upload.sh` file as follow:
+To compile your C program and upload the generated hex to the ATmega328p, use the <a href="script/upload.sh">upload.sh</a> file as follow:
 ```
-sudo ./upload.sh /path/to/program.c
+sudo ./script/upload.sh /path/to/program.c
 ```
 
 ### Links
