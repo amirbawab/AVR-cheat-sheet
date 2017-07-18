@@ -30,7 +30,12 @@ Components:
 * 2x Capacitor 22pf
 * 1x Pocket AVR Programmer
 <img src="https://raw.githubusercontent.com/amirbawab/AVR/master/programmer/images/circuit.jpg"/>
-<img src="https://raw.githubusercontent.com/amirbawab/AVR/master/programmer/images/connections.jpg"/>  
+
+For AVR Programming cable with 6 pins:
+<img src="https://raw.githubusercontent.com/amirbawab/AVR/master/programmer/images/connections-6.jpg"/>  
+
+For AVR Programming cable with 10 pins:
+<img src="https://raw.githubusercontent.com/amirbawab/AVR/master/programmer/images/connections-10.jpg"/>  
 
 ### Compile and upload
 To compile your C program and upload the generated hex to the ATmega328p, use the <a href="script/upload.sh">upload.sh</a> file as follow:
@@ -38,5 +43,6 @@ To compile your C program and upload the generated hex to the ATmega328p, use th
 sudo ./script/upload.sh /path/to/program.c
 ```
 
-### Links
+### Resources
 * https://www.sparkfun.com/
+* https://aaroneiche.com/2016/11/06/programming-avrs-using-a-usbasp-on-a-mac/
