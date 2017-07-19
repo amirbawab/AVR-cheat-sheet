@@ -46,3 +46,5 @@ For instance, consider some IO functionality is required in the C program writte
 
 > #include <avr/io.h>  
 > This header file includes the apropriate IO definitions for the device that has been specified by the -mmcu= compiler command-line switch. This is done by diverting to the appropriate file <avr/ioXXXX.h> which should never be included directly. Some register names common to all AVR devices are defined directly within <avr/common.h>, which is included in <avr/io.h>, but most of the details come from the respective include file.
+
+From: http://www.atmel.com/webdoc/avrlibcreferencemanual/group__avr__io.html
