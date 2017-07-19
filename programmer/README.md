@@ -20,7 +20,7 @@
 ### Programmer
 #### Sparkfun Pocket AVR Programmer
 The device was tested on Ubuntu 16.04 and Arch linux  
-<img src="https://raw.githubusercontent.com/amirbawab/AVR/master/programmer/images/programmer.jpg"/>  
+<img src="https://raw.githubusercontent.com/amirbawab/AVR/master/programmer/images/usbtiny-programmer.jpg"/>  
 
 ### Circuit
 Components:
