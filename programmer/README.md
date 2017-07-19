@@ -20,7 +20,11 @@
 ### Programmer
 #### Sparkfun Pocket AVR Programmer
 The device was tested on Ubuntu 16.04 and Arch linux  
-<img src="https://raw.githubusercontent.com/amirbawab/AVR/master/programmer/images/usbtiny-programmer.jpg"/>  
+<img width="300" src="https://raw.githubusercontent.com/amirbawab/AVR/master/programmer/images/usbtiny-programmer.jpg"/>  
+
+#### USBASP USBISP AVR Programmer
+The device was tested on Arch linux  
+<img width="300" src="https://raw.githubusercontent.com/amirbawab/AVR/master/programmer/images/usbasp-programmer.jpg"/>  
 
 ### Circuit
 Components:
@@ -31,11 +35,11 @@ Components:
 * 1x AVR Programmer
 <img src="https://raw.githubusercontent.com/amirbawab/AVR/master/programmer/images/circuit.jpg"/>
 
-For AVR Programming cable with 6 pins:
-<img src="https://raw.githubusercontent.com/amirbawab/AVR/master/programmer/images/connections-6.jpg"/>  
+For AVR Programming cable with 6 pins:  
+<img width="300" src="https://raw.githubusercontent.com/amirbawab/AVR/master/programmer/images/connections-6.jpg"/>  
 
-For AVR Programming cable with 10 pins:
-<img src="https://raw.githubusercontent.com/amirbawab/AVR/master/programmer/images/connections-10.jpg"/>  
+For AVR Programming cable with 10 pins:  
+<img width="300" src="https://raw.githubusercontent.com/amirbawab/AVR/master/programmer/images/connections-10.jpg"/>  
 
 ### Compile and upload
 To compile your C program and upload the generated hex to the ATmega328p, use the <a href="script/ATmega328-upload.sh">ATmega328-upload.sh</a> file as follow:
