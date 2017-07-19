@@ -48,3 +48,10 @@ For instance, consider some IO functionality is required in the C program writte
 > This header file includes the apropriate IO definitions for the device that has been specified by the -mmcu= compiler command-line switch. This is done by diverting to the appropriate file <avr/ioXXXX.h> which should never be included directly. Some register names common to all AVR devices are defined directly within <avr/common.h>, which is included in <avr/io.h>, but most of the details come from the respective include file.
 
 From: http://www.atmel.com/webdoc/avrlibcreferencemanual/group__avr__io.html
+
+#### Compile and upload
+* Write a small C program for the your AVR microntroller
+* Build the project
+* Do the required wiring between the AVR microcontroller and the programmer (check the prgorammer section for more details)
+* Plug the programmer into your machine
+* Go to **AVR** > **Upload Project to Target Device**
