@@ -1,16 +1,62 @@
 # AVR Cheat Sheet 
 
+*The Following Cheat Sheet is built based on the ATmega328p, but other AVR microcontroller should follow similar steps.*
+
 ### Table of Contents
 * [Datasheet](#datasheet)
+* [Packages](#packages)
+  * [Arch linux](#arch-linux)
+* [Microcontroller](microcontroller)
+  * [ATmega328p](#atmega328p)
+* [Programmer](#programmer)
+  * [Sparkfun Pocket AVR Programmer](#sparkfun-pocket-avr-programmer)
+  * [USBASP USBISP AVR Programmer](#usbasp-usbisp-avr-programmer)
+  * [Programmer circuit](#programmer-circuit)
 * [Eclipse](#eclipse)
   * [Installation](#installation)
   * [Create a new project](#create-a-new-project)
   * [Configure project](#configure-project)
-  * [Compile and upload](#compile-and-upload)
+  * [Build and upload from Eclipse](#build-and-upload-from-eclipse)
+  * [Build and upload manually](#build-and-upload-manually)
 
 ### Datasheet
 #### ATmega328p
 PDF from <a href="http://www.atmel.com/Images/Atmel-42735-8-bit-AVR-Microcontroller-ATmega328-328P_Datasheet.pdf">Atmel</a>
+
+### Packages
+#### Arch linux
+* avr-binutils
+* avr-gcc
+* avr-libc
+* avrdude
+
+### Microcontroller
+#### ATmega328p
+<img src="https://raw.githubusercontent.com/amirbawab/AVR/master/images/atmega328p.jpg"/>  
+
+### Programmer
+#### Sparkfun Pocket AVR Programmer
+The device was tested on Ubuntu 16.04 and Arch linux  
+<img width="300" src="https://raw.githubusercontent.com/amirbawab/AVR/master/images/usbtiny-programmer.jpg"/>  
+
+#### USBASP USBISP AVR Programmer
+The device was tested on Arch linux  
+<img width="300" src="https://raw.githubusercontent.com/amirbawab/AVR/master/images/usbasp-programmer.jpg"/>
+
+#### Programmer circuit
+Components:
+* 1x ATmega328p
+* 1x Resistor 10K
+* 1x Crystal 16Mhz
+* 2x Capacitor 22pf
+* 1x AVR Programmer
+<img src="https://raw.githubusercontent.com/amirbawab/AVR/master/images/circuit.jpg"/>
+
+For AVR Programming cable with 6 pins:  
+<img width="300" src="https://raw.githubusercontent.com/amirbawab/AVR/master/images/connections-6.jpg"/>  
+
+For AVR Programming cable with 10 pins:  
+<img width="300" src="https://raw.githubusercontent.com/amirbawab/AVR/master/images/connections-10.jpg"/>  
 
 ### Eclipse
 #### Installation
@@ -34,10 +80,11 @@ PDF from <a href="http://www.atmel.com/Images/Atmel-42735-8-bit-AVR-Microcontrol
   * From the **Programmer** tab
     * Create a new programmer configuration
     * Give this configuration a name (Sparkfun Pocket AVR Programmer, USBASP USBISP AVR Programmer, etc...)
-    * From the **Programmer Hardware** select:
+    * From the **Programmer Hardware**:
       * Select **USBasp** if you have the "USBASP USBISP AVR Programmer"
       * Select **USBtiny** if you have the "SparkFun Pocket AVR Programmer"
       * If you have something else then select the corresponding value
+      * The option selected will be the value for the `-c` flag in the `avrdude` command
   * From the **Flash/EEPROM** tab
     * Make sure **Upload Flash Memory Image** is **from build**
 * From the expanded **AVR**, select **Target Hardware**
@@ -53,9 +100,23 @@ For instance, consider some IO functionality is required in the C program writte
 
 From: http://www.atmel.com/webdoc/avrlibcreferencemanual/group__avr__io.html
 
-#### Compile and upload
-* Write a small C program for the your AVR microntroller
+#### Build and upload from Eclipse
+* Write a small C program for your AVR microntroller
 * Build the project
 * Do the required wiring between the AVR microcontroller and the programmer (check the prgorammer section for more details)
 * Plug the programmer into your machine
 * Go to **AVR** > **Upload Project to Target Device**
+
+#### Build and upload manually
+* Write a small C program for your AVR microcontroller
+* Generate object file: `avr-gcc -std=c11 -mmcu=atmega328 -O -o avr.o avr.c`
+  * Select the correct `-mmcu` switch value for your AVR microcontroller
+* Generate hex file: `avr-objcopy -O ihex avr.o avr.hex`
+* Upload hex to the AVR microcontroller: `avrdude -c usbasp -p m328p -U flash:w:avr.hex`
+  * Select the `-c` value depending on which AVR programmer device your are using.
+    * Use `usbtiny` for the SparkFun Pocket AVR Programmer
+    * Use `usbasp` for the USBASP USBISP AVR Programmer
+    * Or if you have another AVR Programmer select the correct value
+  * Select the `-p` value depending on which AVR microcontroller is used
+
+Use <a href="script/ATmega328-upload.sh">ATmega328-upload.sh</a> script file to buid a C program and upload its hex to the ATmega328p (The script file uses the commands described above). 
