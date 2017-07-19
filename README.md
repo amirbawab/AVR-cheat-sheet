@@ -18,6 +18,8 @@
   * [Configure project](#configure-project)
   * [Build and upload from Eclipse](#build-and-upload-from-eclipse)
   * [Build and upload manually](#build-and-upload-manually)
+* [Contributing](#contributing)
+* [Resources](#resources)
 
 ### Datasheet
 #### ATmega328p
@@ -120,3 +122,15 @@ From: http://www.atmel.com/webdoc/avrlibcreferencemanual/group__avr__io.html
   * Select the `-p` value depending on which AVR microcontroller is used
 
 Use <a href="script/ATmega328-upload.sh">ATmega328-upload.sh</a> script file to buid a C program and upload its hex to the ATmega328p (The script file uses the commands described above). 
+
+### Contributing
+* Edit README.md
+* Add your changes
+* Write description of your changes in the `Commit changes` form
+* Select the radio button "Create a new branch for this commit and start a pull request."
+* Specify a name for your commit branch
+* Click on "Propose file change" and then on "Create pull request"
+
+### Resources
+* https://www.sparkfun.com/
+* https://aaroneiche.com/2016/11/06/programming-avrs-using-a-usbasp-on-a-mac/
