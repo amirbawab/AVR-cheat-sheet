@@ -18,6 +18,7 @@
   * [Configure project](#configure-project)
   * [Build and upload from Eclipse](#build-and-upload-from-eclipse)
   * [Build and upload manually](#build-and-upload-manually)
+* [Input/Output](#inputoutput)
 * [Contributing](#contributing)
 * [Resources](#resources)
 
@@ -123,6 +124,21 @@ From: http://www.atmel.com/webdoc/avrlibcreferencemanual/group__avr__io.html
 
 Use <a href="script/ATmega328-upload.sh">ATmega328-upload.sh</a> script file to buid a C program and upload its hex to the ATmega328p (The script file uses the commands described above). 
 
+### Input/Output
+
+#### I/O Port
+Each Input/Output pin on the AVR microcontroller belong to a Port alphabet (e.g. on the ATmega328p, pin 28 belongs to Port C).
+
+#### DDRx
+```
++-------+-------+-------+-------+-------+-------+-------+-------+
+| DDRx0 | DDRx1 | DDRx2 | DDRx3 | DDRx4 | DDRx5 | DDRx6 | DDRx7 |
++-------+-------+-------+-------+-------+-------+-------+-------+
+```
+Data Direction Register x allows specifying the direction of the I/O pins belonging to the Port x.
+Each DDRx register is one byte (8 bits), and each bit is dedicated for a physical pin.  
+If the bit 1 was written to register DDRx at index DDRx0, then Px0 direction is "output". If the bit 0 was written, then Px0 direction is "input".
+
 ### Contributing
 * Edit README.md
 * Add your changes
@@ -134,3 +150,4 @@ Use <a href="script/ATmega328-upload.sh">ATmega328-upload.sh</a> script file to 
 ### Resources
 * https://www.sparkfun.com/
 * https://aaroneiche.com/2016/11/06/programming-avrs-using-a-usbasp-on-a-mac/
+* http://www.avr-tutorials.com/digital/about-avr-8-bit-microcontrollers-digital-io-ports
