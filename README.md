@@ -5,24 +5,12 @@
 ### Table of Contents
 * [Datasheet](#datasheet)
 * [Packages](#packages)
-  * [Arch linux](#arch-linux)
 * [Microcontroller](microcontroller)
-  * [ATmega328p](#atmega328p)
 * [Programmer](#programmer)
-  * [Sparkfun Pocket AVR Programmer](#sparkfun-pocket-avr-programmer)
-  * [USBASP USBISP AVR Programmer](#usbasp-usbisp-avr-programmer)
-  * [Programmer circuit](#programmer-circuit)
 * [Eclipse](#eclipse)
-  * [Installation](#installation)
-  * [Create a new project](#create-a-new-project)
-  * [Configure project](#configure-project)
-  * [Build and upload from Eclipse](#build-and-upload-from-eclipse)
-  * [Build and upload manually](#build-and-upload-manually)
+* [Manually (no IDE)](#manually-no-ide)
 * [Input/Output](#inputoutput)
-  * [Introduction](#introduction)
-  * [DDRx](#ddrx)
-  * [PORTx](#portx)
-  * [PINx](#pinx)
+* [Fuse bits](#fuse-bits)
 * [Contributing](#contributing)
 * [Resources](#resources)
 
@@ -107,6 +95,14 @@ For instance, consider some IO functionality is required in the C program writte
 
 From: http://www.atmel.com/webdoc/avrlibcreferencemanual/group__avr__io.html
 
+#### Configure fuse bits
+* In **Project Explorer** select the AVR project
+* Go to **Project** > **Properties**
+* Expand **AVR** then select **AVRDude**
+* In **Fuses** tab, **select direct hex values** then click on the **Select editor** icon to configure the fuses. Or if you know the hex values, just write them in the corresponding fields (fuse bytes).
+* *Note: A wrong configuration can possibly damage your chip.*
+* Done! Click **Apply and Close**
+
 #### Build and upload from Eclipse
 * Write a small C program for your AVR microntroller
 * Build the project
@@ -114,6 +110,7 @@ From: http://www.atmel.com/webdoc/avrlibcreferencemanual/group__avr__io.html
 * Plug the programmer into your machine
 * Go to **AVR** > **Upload Project to Target Device**
 
+### Manually (no IDE)
 #### Build and upload manually
 * Write a small C program for your AVR microcontroller
 * Generate object file: `avr-gcc -std=c11 -mmcu=atmega328 -O -o avr.o avr.c`
@@ -127,6 +124,8 @@ From: http://www.atmel.com/webdoc/avrlibcreferencemanual/group__avr__io.html
   * Select the `-p` value depending on which AVR microcontroller is used
 
 Use <a href="script/ATmega328-upload.sh">ATmega328-upload.sh</a> script file to buid a C program and upload its hex to the ATmega328p (The script file uses the commands described above). 
+
+#### Configure fuse bytes manually
 
 ### Input/Output
 #### Introduction
@@ -163,7 +162,7 @@ If DDx0 is set to "output", then writing 1 at PORTx0 drives Px0 high, and writin
 ```
 Pin x register allows reading the values on the pins with "input" direction. For instance, if DDx0 is set to "input", then PINx0 can be used to read the input value.
 
-### Fuse Bits
+### Fuse bits
 #### Introduction
 In an AVR, fuse bytes are composed of 8 fuse bits responsible for the behavior of the chip. The bits are programmable and nonvolatile (the fuse bits programmed dont change their values the next time the chip is active). Writing 1 into a fuse bit sets it to unprogrammed and 0 sets it to programmed.
 
