@@ -165,9 +165,12 @@ Pin x register allows reading the values on the pins with "input" direction. For
 
 ### Fuse Bits
 #### Introduction
-Fuse bytes are composed of 8 fuse bits responsible for the behavior of the chip. The bits are programmable and nonvolatile (the fuse bits programmed dont change their values the next time the chip is active).
+In an AVR, fuse bytes are composed of 8 fuse bits responsible for the behavior of the chip. The bits are programmable and nonvolatile (the fuse bits programmed dont change their values the next time the chip is active). Writing 1 into a fuse bit sets it to unprogrammed and 0 sets it to programmed.
 
-To learn more about the types of fuse bytes and what each fuse bit does, refer to your AVR [datasheet](#datasheet) § 31.2. Fuse Bits
+To learn more about the types of fuse bytes and what each fuse bit does, refer to your AVR [datasheet](#datasheet) § 31.2. Fuse Bits.
+
+#### Configure AVR clock
+An AVR clock speed detemines how many instructions are executed per second (Hz or cycles/second). 
 
 ### Contributing
 * Edit README.md
@@ -182,3 +185,4 @@ To learn more about the types of fuse bytes and what each fuse bit does, refer t
 * https://aaroneiche.com/2016/11/06/programming-avrs-using-a-usbasp-on-a-mac/
 * http://www.avr-tutorials.com/digital/about-avr-8-bit-microcontrollers-digital-io-ports
 * http://www.ladyada.net/learn/avr/fuses.html
+* http://treehouseprojects.ca/fusebits/
