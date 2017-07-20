@@ -129,7 +129,6 @@ From: http://www.atmel.com/webdoc/avrlibcreferencemanual/group__avr__io.html
 Use <a href="script/ATmega328-upload.sh">ATmega328-upload.sh</a> script file to buid a C program and upload its hex to the ATmega328p (The script file uses the commands described above). 
 
 ### Input/Output
-
 #### Introduction
 Each Input/Output pin on the AVR microcontroller belong to a Port alphabet (e.g. Pin 28 on the ATmega328p belongs to Port C). Each of those pins has three register bits assigned to them: DDxn in DDRx, PORTxn in PORTx and PINxn in PINx.
 
@@ -164,6 +163,12 @@ If DDx0 is set to "output", then writing 1 at PORTx0 drives Px0 high, and writin
 ```
 Pin x register allows reading the values on the pins with "input" direction. For instance, if DDx0 is set to "input", then PINx0 can be used to read the input value.
 
+### Fuse Bits
+#### Introduction
+Fuse bytes are composed of 8 fuse bits responsible for the behavior of the chip. The bits are programmable and nonvolatile (the fuse bits programmed dont change their values the next time the chip is active).
+
+To learn more about the types of fuse bytes and what each fuse bit does, refer to your AVR [datasheet](#datasheet) § 31.2. Fuse Bits
+
 ### Contributing
 * Edit README.md
 * Add your changes
@@ -176,3 +181,4 @@ Pin x register allows reading the values on the pins with "input" direction. For
 * https://www.sparkfun.com/
 * https://aaroneiche.com/2016/11/06/programming-avrs-using-a-usbasp-on-a-mac/
 * http://www.avr-tutorials.com/digital/about-avr-8-bit-microcontrollers-digital-io-ports
+* http://www.ladyada.net/learn/avr/fuses.html
