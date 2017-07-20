@@ -19,6 +19,10 @@
   * [Build and upload from Eclipse](#build-and-upload-from-eclipse)
   * [Build and upload manually](#build-and-upload-manually)
 * [Input/Output](#inputoutput)
+  * [Introduction](#introduction)
+  * [DDRx](#ddrx)
+  * [PORTx](#portx)
+  * [PINx](#pinx)
 * [Contributing](#contributing)
 * [Resources](#resources)
 
