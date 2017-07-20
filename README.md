@@ -5,7 +5,7 @@
 ### Table of Contents
 * [Datasheet](#datasheet)
 * [Packages](#packages)
-* [Microcontroller](microcontroller)
+* [Microcontroller](#microcontroller)
 * [Programmer](#programmer)
 * [Eclipse](#eclipse)
 * [Manually (no IDE)](#manually-no-ide)
