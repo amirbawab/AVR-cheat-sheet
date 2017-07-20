@@ -35,16 +35,16 @@ PDF from <a href="http://www.atmel.com/Images/Atmel-42735-8-bit-AVR-Microcontrol
 
 ### Microcontroller
 #### ATmega328p
-<img src="https://raw.githubusercontent.com/amirbawab/AVR/master/images/atmega328p.jpg"/>  
+<img src="images/atmega328p.jpg"/>  
 
 ### Programmer
 #### Sparkfun Pocket AVR Programmer
 The device was tested on Ubuntu 16.04 and Arch linux  
-<img width="300" src="https://raw.githubusercontent.com/amirbawab/AVR/master/images/usbtiny-programmer.jpg"/>  
+<img width="300" src="images/usbtiny-programmer.jpg"/>  
 
 #### USBASP USBISP AVR Programmer
 The device was tested on Arch linux  
-<img width="300" src="https://raw.githubusercontent.com/amirbawab/AVR/master/images/usbasp-programmer.jpg"/>
+<img width="300" src="images/usbasp-programmer.jpg"/>
 
 #### Programmer circuit
 Components:
@@ -53,13 +53,13 @@ Components:
 * 1x Crystal 16Mhz (needed for microcontrollers programs that use external oscillator. e.g Bootloader)
 * 2x Capacitor 22pf
 * 1x AVR Programmer
-<img src="https://raw.githubusercontent.com/amirbawab/AVR/master/images/circuit.jpg"/>
+<img src="images/circuit.jpg"/>
 
 For AVR Programming cable with 6 pins:  
-<img width="300" src="https://raw.githubusercontent.com/amirbawab/AVR/master/images/connections-6.jpg"/>  
+<img width="300" src="images/connections-6.jpg"/>  
 
 For AVR Programming cable with 10 pins:  
-<img width="300" src="https://raw.githubusercontent.com/amirbawab/AVR/master/images/connections-10.jpg"/>  
+<img width="300" src="images/connections-10.jpg"/>  
 
 ### Eclipse
 #### Installation
