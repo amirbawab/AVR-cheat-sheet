@@ -152,6 +152,14 @@ Port x register has two functionalities depending on the Data Direction Register
 If DDx0 is set to "input", then writing 1 at PORTx0 activates the pull-up resistor at Px0, and writing 0 deactivates it at Px0.  
 If DDx0 is set to "output", then writing 1 at PORTx0 drives Px0 high, and writing 0 drives Px0 low. 
 
+#### PINx
+```
++-------+-------+-------+-------+-------+-------+-------+-------+
+| PINx7 | PINx6 | PINx5 | PINx4 | PINx3 | PINx2 | PINx1 | PINx0 |
++-------+-------+-------+-------+-------+-------+-------+-------+
+```
+Pin x register allows reading the values on the pins with "input" direction. For instance, if DDx0 is set to "input", then PINx0 can be used to read the input value.
+
 ### Contributing
 * Edit README.md
 * Add your changes
