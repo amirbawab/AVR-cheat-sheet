@@ -126,18 +126,31 @@ Use <a href="script/ATmega328-upload.sh">ATmega328-upload.sh</a> script file to 
 
 ### Input/Output
 
-#### I/O Port
-Each Input/Output pin on the AVR microcontroller belong to a Port alphabet (e.g. on the ATmega328p, pin 28 belongs to Port C).
+#### Introduction
+Each Input/Output pin on the AVR microcontroller belong to a Port alphabet (e.g. Pin 28 on the ATmega328p belongs to Port C). Each of those pins has three register bits assigned to them: DDxn in DDRx, PORTxn in PORTx and PINxn in PINx.
+
+Source: [Datasheet](#datasheet) § 18.2.1. Configuring the Pin
+
+DDRx, PORTx and PINx registers consist of one byte each, allowing at most 8 physical pins to be configured per alphabet letter. 
 
 #### DDRx
 ```
-+-------+-------+-------+-------+-------+-------+-------+-------+
-| DDRx0 | DDRx1 | DDRx2 | DDRx3 | DDRx4 | DDRx5 | DDRx6 | DDRx7 |
-+-------+-------+-------+-------+-------+-------+-------+-------+
++------+------+------+------+------+------+------+------+
+| DDx7 | DDx6 | DDx5 | DDx4 | DDx3 | DDx2 | DDx1 | DDx0 |
++------+------+------+------+------+------+------+------+
 ```
-Data Direction Register x allows specifying the direction of the I/O pins belonging to the Port x.
-Each DDRx register is one byte (8 bits), and each bit is dedicated for a physical pin.  
-If the bit 1 was written to register DDRx at index DDRx0, then Px0 direction is "output". If the bit 0 was written, then Px0 direction is "input".
+Data Direction Register x allows specifying the direction of the I/O pins belonging to the Port x.  
+If the bit 1 was written to DDx0, then Px0 direction is "output". If the bit 0 was written, then Px0 direction is "input".
+
+#### PORTx
+```
++--------+--------+--------+--------+--------+--------+--------+--------+
+| PORTx7 | PORTx6 | PORTx5 | PORTx4 | PORTx3 | PORTx2 | PORTx1 | PORTx0 |
++--------+--------+--------+--------+--------+--------+--------+--------+
+```
+Port x register has two functionalities depending on the Data Direction Register x bits values.  
+If DDx0 is set to "input", then writing 1 at PORTx0 activates the pull-up resistor at Px0, and writing 0 deactivates it at Px0.  
+If DDx0 is set to "output", then writing 1 at PORTx0 drives Px0 high, and writing 0 drives Px0 low. 
 
 ### Contributing
 * Edit README.md
