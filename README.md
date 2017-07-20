@@ -49,8 +49,8 @@ The device was tested on Arch linux
 #### Programmer circuit
 Components:
 * 1x ATmega328p
-* 1x Resistor 10K
-* 1x Crystal 16Mhz
+* 1x Resistor 10K ohm
+* 1x Crystal 16Mhz (needed for microcontrollers programs that use external oscillator. e.g Bootloader)
 * 2x Capacitor 22pf
 * 1x AVR Programmer
 <img src="https://raw.githubusercontent.com/amirbawab/AVR/master/images/circuit.jpg"/>
