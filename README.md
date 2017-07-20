@@ -167,12 +167,24 @@ Pin x register allows reading the values on the pins with "input" direction. For
 #### Introduction
 In an AVR, fuse bytes are composed of 8 fuse bits responsible for the behavior of the chip. The bits are programmable and nonvolatile (the fuse bits programmed dont change their values the next time the chip is active). Writing 1 into a fuse bit sets it to unprogrammed and 0 sets it to programmed.
 
-Some AVR microcontrollers have 2 fuse bytes (low and high) and others like the ATmega328p have 3 fuse bytes (low, high and extended). 
+Some AVR microcontrollers have 2 fuse bytes (low and high) and others like the ATmega328p have 3 fuse bytes (low, high and extended). The fuse bits position and default values can be different in different AVR microcontrollers, so refer to the [datasheet](#datasheet) (§ 31.2. Fuse Bits) for the exact information (othewise, wrong values can possibly damage your chip). 
 
-Source: [datasheet](#datasheet) § 31.2. Fuse Bits.
+#### Low fuse byte
+The low fuse byte enables controlling the speed, start up time and the source of the clock. Furthermore it allows exposing the system clock output on a pin specified in your AVR datasheet.
+```
++--------+----------------------+ \
+| CKDIV8 | Divide clock by 8    |  |
+| CKOUT  | Clock output         |  |
+| SUT1   | Select start-up time |  |
+| SUT0   | Select start-up time |   \ low fuse byte (8 fuse bits)
+| CKSEL3 | Select Clock source  |   / Refer to your datasheet for details about the 
+| CKSEL2 | Select Clock source  |  |  fuse bits positions and default values
+| CKSEL1 | Select Clock source  |  |
+| CKSEL0 | Select Clock source  |  |
++--------+----------------------+ /
+```
+#### High fuse byte
 
-#### Configure AVR clock
-An AVR clock speed detemines how many instructions are executed per second (Hz or cycles/second). 
 
 ### Contributing
 * Edit README.md
@@ -188,3 +200,4 @@ An AVR clock speed detemines how many instructions are executed per second (Hz o
 * http://www.avr-tutorials.com/digital/about-avr-8-bit-microcontrollers-digital-io-ports
 * http://www.ladyada.net/learn/avr/fuses.html
 * http://treehouseprojects.ca/fusebits/
+* http://www.instructables.com/id/How-to-change-fuse-bits-of-AVR-Atmega328p-8bit-mic/
