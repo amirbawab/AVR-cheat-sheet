@@ -34,4 +34,4 @@ Compile and upload:
 ```
 
 ### Circuit
-<img src=../../../images/circuit-led-int-clock.jpg"">
+<img src="../../../images/circuit-int-clock-led.jpg">
