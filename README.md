@@ -166,24 +166,26 @@ Pin x register allows reading the values on the pins with "input" direction. For
 #### Introduction
 In an AVR, fuse bytes are composed of 8 fuse bits responsible for the behavior of the chip. The bits are programmable and nonvolatile (the fuse bits programmed dont change their values the next time the chip is active). Writing 1 into a fuse bit sets it to unprogrammed and 0 sets it to programmed.
 
-Some AVR microcontrollers have 2 fuse bytes (low and high) and others like the ATmega328p have 3 fuse bytes (low, high and extended). The fuse bits position and default values can be different in different AVR microcontrollers, so refer to the [datasheet](#datasheet) (§ 31.2. Fuse Bits) for the exact information (othewise, wrong values can possibly damage your chip). 
+Some AVR microcontrollers have 2 fuse bytes (low and high) and others like the ATmega328p have 3 fuse bytes (low, high and extended). The fuse bits position and default values can be different in different AVR microcontrollers, so refer to you AVR datasheet section "Fuse Bits" for the exact information (othewise, wrong values can possibly damage your chip. 
 
 #### Low fuse byte
-The low fuse byte enables controlling the speed, start up time and the source of the clock. Furthermore it allows exposing the system clock output on a pin specified in your AVR datasheet.
-```
-+--------+----------------------+ \
-| CKDIV8 | Divide clock by 8    |  |
-| CKOUT  | Clock output         |  |
-| SUT1   | Select start-up time |  |
-| SUT0   | Select start-up time |   \ low fuse byte (8 fuse bits)
-| CKSEL3 | Select Clock source  |   / Refer to your datasheet for details about the 
-| CKSEL2 | Select Clock source  |  |  fuse bits positions and default values
-| CKSEL1 | Select Clock source  |  |
-| CKSEL0 | Select Clock source  |  |
-+--------+----------------------+ /
-```
-#### High fuse byte
+The low fuse byte enables controlling the speed, start up time and the source of the clock. Furthermore, it allows exposing the system clock output on a pin specified in your AVR datasheet.
 
+#### High fuse byte
+The high fuse byte is responsible for various type of configuration. The features explained in the following lines are extracted from the high fuse byte table shown in the ATmega328p [datasheet](#datasheet), and can be different from your AVR microcontroller, so always refer to your AVR datasheet.
+
+* Enable/Disable AVR reset functionality. Disabling the AVR reset makes the chip non reprogrammable.
+* Enable/Disable chip debug mode.
+* Enable/Disable SPI communication
+* Enable/Disable a watchdog timer which resets the chip if it was not responding.
+* Enable/Disbale erasing EEPROM (a non-volatile memory) which can hold permanent data.
+* Enable/Disable loading the bootloader
+* Define the size of the bootloader
+
+*Warning: Do not modify the reset, debug and SPI functionalities if you don't know how they work because this can prevent you from reprogramming the chip*
+
+#### Extended fuse byte
+If the ATmega chips is offered a poor voltage, it can become unstable and possibly misbehave. Therefore, the extended fuse byte allows setting a BOD (Brown-Out Detector) threshold voltage determining if the chip should stay active or should reset.
 
 ### Contributing
 * Edit README.md
