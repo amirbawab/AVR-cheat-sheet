@@ -39,13 +39,23 @@ The device was tested on Arch linux
 <img width="300" src="images/usbasp-programmer.jpg"/>
 
 #### Programmer circuit
-Components:
+Components for circuit (1) and (2):
 * 1x ATmega328p
 * 1x Resistor 10K ohm
-* 1x Crystal 16Mhz (needed for microcontrollers programs that use external oscillator. e.g Bootloader)
-* 2x Capacitor 22pf
 * 1x AVR Programmer
-<img src="images/circuit.jpg"/>
+
+Additional components for circuit (2):
+* 1x Crystal oscillator
+* 2x Capacitor 22pf
+
+Circuit (1): If the AVR fuse bits are configured to use the internal oscillator 
+(default values from the datasheet)
+<img src="images/circuit.jpg"/>  
+
+Circuit (2): If the AVR fuse bits are configured to use an external oscillator
+<img src="images/circuit.jpg"/>  
+
+*Note: For more details about fuse bits please refer to the [Fuse bits](#fuse-bits) section*
 
 For AVR Programming cable with 6 pins:  
 <img width="300" src="images/connections-6.jpg"/>  
