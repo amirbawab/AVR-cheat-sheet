@@ -5,9 +5,8 @@
 * 1x Resistor 330 ohm for the LED
 * 1x Resistor 10K for the ATmega328p
 * 1x AVR microcontroller
+* 1x AVR programmer
 
-*Note: This example assumes that the fuse bits are configured to use the internal oscillator. Refer to the cheat sheet for further details.*
-
-*Note: The wires between the microcontrollers and the programmer are not shown in this circuit but they can optionally remain in the circuit even after programming the chip. Refer to the cheat sheet for further details about the wiring.*
+*Note: This example assumes that the fuse bits are configured to use the internal RC. Refer to the cheat sheet or the clock source example for further details.*
 
 <img src="../../../images/circuit-led-1.jpg">
