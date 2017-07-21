@@ -125,10 +125,19 @@ From: http://www.atmel.com/webdoc/avrlibcreferencemanual/group__avr__io.html
 ### Manually (no IDE)
 #### Build and upload manually
 * Write a small C program for your AVR microcontroller
-* Generate object file: `avr-gcc -std=c11 -mmcu=atmega328 -O -o avr.o avr.c`
+* Generate object file: 
+```
+avr-gcc -std=c11 -mmcu=atmega328 -O -o avr.o avr.c
+```
   * Select the correct `-mmcu` switch value for your AVR microcontroller
-* Generate hex file: `avr-objcopy -O ihex avr.o avr.hex`
-* Upload hex to the AVR microcontroller: `avrdude -c usbasp -p m328p -U flash:w:avr.hex`
+* Generate hex file:
+```
+avr-objcopy -O ihex avr.o avr.hex
+```
+* Upload hex to the AVR microcontroller: 
+```
+avrdude -c usbasp -p m328p -U flash:w:avr.hex
+```
   * Select the `-c` value depending on which AVR programmer device your are using.
     * Use `usbtiny` for the SparkFun Pocket AVR Programmer
     * Use `usbasp` for the USBASP USBISP AVR Programmer
@@ -139,6 +148,12 @@ Use <a href="script/ATmega328-upload.sh">ATmega328-upload.sh</a> script file to 
 
 #### Configure fuse bytes manually
 #### Read fuse bytes manually
+* Reading fuse bits is done using `avrdude` command.
+```
+avrdude -c usbasp -p m328p -U lfuse:r:-:h -U hfuse:r:-:h -U efuse:r:-:h
+```
+  * Remeber to update the `-c` and `-p` switches to match your programmer and chip. (more details: [Build and upload manually](#build-and-upload-manually).
+  * The `-` symbol in each of the `-U` switches values tells the command to print the results on the screen. To write the output on a file, just replace `-` by a file path (e.g. `/tmp/low_fuse.hex`). 
 
 ### Input/Output
 #### Introduction
