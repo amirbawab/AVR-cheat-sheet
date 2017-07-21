@@ -146,7 +146,28 @@ avrdude -c usbasp -p m328p -U flash:w:avr.hex
 
 Use <a href="script/ATmega328-upload.sh">ATmega328-upload.sh</a> script file to buid a C program and upload its hex to the ATmega328p (The script file uses the commands described above). 
 
-#### Configure fuse bytes manually
+#### Reset fuse bytes to default values manually
+*Warning: In the following steps, the ATmega328p will be used as an example, but the ideas is the same for other AVR microcontrollers. Make sure you use your AVR datasheet and not another AVR datasheet because changing wrong fuse bits can possibly prevent you from reprogramming the AVR later*
+
+* Open the ATmega328p [datasheet](#datasheet) § 31.2. Fuse Bits.
+* Locate the **Fuse Low Byte** table
+  * Start writing the **Default value** top-down (Bits#: 7...0)
+  * ATmega328p default values result in the following binary: 01100010 (binary) = 0x62 (hex)
+  * The low fuse byte switch is now ready: `-Ulfuse:w:0x62:m`
+* Locate the **Fuse High Byte** table
+  * Similarly, write the **Default value**
+  * ATmega328p default values result in the following binary: 11011001 (binary) = 0xd9 (hex)
+  * The high fuse byte switch is now ready: `-Uhfuse:w:0xd9:m`
+* Locate the **Extended Fuse Byte for ATmega328/P** table
+  * Write the **Default value**
+  * ATmega328p default values result in the following binary: 11111111 (binary) = 0xff (hex)
+  * The extended fuse byte switch is now ready: `-Uefuse:w:0xff:m`
+* The final command looks like this:
+```
+avrdude -pm328p -cusbasp -Ulfuse:w:0x62:m -Uhfuse:w:0xd9:m -Uefuse:w:0xff:m 
+```
+  * Remeber to update the `-c` and `-p` switches to match your programmer and chip. (more details: [Build and upload manually](#build-and-upload-manually).
+
 #### Read fuse bytes manually
 * Reading fuse bits is done using `avrdude` command.
 ```
