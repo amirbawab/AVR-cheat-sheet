@@ -30,6 +30,9 @@ avr-gcc -std=c11 -mmcu=atmega328 -O -o blink.o blink.c
 # Generate hex file
 avr-objcopy -O ihex blink.o blink.hex
 
+# [Optional] Read fuse bytes to know if the external crystal oscillator is useful in the circuit
+avrdude -c usbasp -p m328p -U lfuse:r:-:h -U hfuse:r:-:h -U efuse:r:-:h
+
 # Upload hex file to the ATmega328p and reset fuse bits to default values
 avrdude -pm328p -cusbasp -Uflash:w:blink.hex:a -Ulfuse:w:0x62:m -Uhfuse:w:0xd9:m -Uefuse:w:0xff:m
 
