@@ -138,6 +138,7 @@ From: http://www.atmel.com/webdoc/avrlibcreferencemanual/group__avr__io.html
 Use <a href="script/ATmega328-upload.sh">ATmega328-upload.sh</a> script file to buid a C program and upload its hex to the ATmega328p (The script file uses the commands described above). 
 
 #### Configure fuse bytes manually
+#### Read fuse bytes manually
 
 ### Input/Output
 #### Introduction
