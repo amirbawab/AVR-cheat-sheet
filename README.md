@@ -46,14 +46,16 @@ Components for circuit (1) and (2):
 
 Additional components for circuit (2):
 * 1x Crystal oscillator
-* 2x Capacitor 22pf
+* 2x Capacitor
+
+*Note: For details about the crystal oscillator and capacitors values, refer to your AVR datasheet under the section "System Clock and Clock Options"*
 
 Circuit (1): If the AVR fuse bits are configured to use the internal oscillator 
 (default values from the datasheet)
-<img src="images/circuit.jpg"/>  
+<img src="images/circuit-programmer-1.jpg"/>  
 
 Circuit (2): If the AVR fuse bits are configured to use an external oscillator
-<img src="images/circuit.jpg"/>  
+<img src="images/circuit-programmer-2.jpg"/>  
 
 *Note: For more details about fuse bits please refer to the [Fuse bits](#fuse-bits) section*
 
