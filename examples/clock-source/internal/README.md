@@ -42,6 +42,7 @@ avrdude -c usbasp -p m328p -U flash:w:example2.hex -Ulfuse:w:0xe2:m -Uhfuse:w:0x
 * Clock speed = 8Mhz
 * Set the `F_CPU` to 16000000UL
 * Every 1 second delay in the program becomes 2 seconds in reality
+* Avoid doing this, the clock might lose its accuracy
 
 Compile and upload:
 ```
