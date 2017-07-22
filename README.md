@@ -275,7 +275,16 @@ By default the ATmega328p internal RC Oscillator provides an 8.0Mhz clock. Also 
 External clock source, such as an external crystal oscillator, is sometimes important because it provides a more accurate timing than the one offered by the internal RC oscillator integrated in the AVR. A more accurate clock is required when the program developed depends on a very accurate clock (e.g. Timer) or envolves USB related functionalities where timing is curicial. However, adding an external crystal oscillator consumes more power, resulting in quickly draining the batteries.
 
 #### Example of clock source
-Example for using internal and external clock source can be found in the seciont [Examples](#examples)
+Example for using internal and external clock source can be found in the section [Examples](#examples)
+
+### External interrupts
+#### Difference between INTx and PCINTx
+* There are only few INTx pins but there are a lot more PCINTx pins.
+* Each INTx pin have its own interrupt vector making it simple for the developer to listen for an event on that specific pin. On the other hand, a PCINTx pin shares an interrupt vector with several others, so listening for an event on that specific pin requires additional steps in order to mask out the other PCINTx pins in the same vector. To know which PCINTx pins share the same interrupt vector, refer to you AVR datashete at section "EXINT - External Interrupts".
+* INTx can report events under several situations (For ATmega328p: low, falling, rising, any). PCINTx report events on any change.
+
+#### Example of external interrputs
+Example for using external interrupts can be found in the section [Examples](#examples)
 
 ### Examples
 Some example files has been provided for further explanation
