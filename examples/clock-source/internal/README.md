@@ -51,4 +51,12 @@ avrdude -c usbasp -p m328p -U flash:w:example3.hex -Ulfuse:w:0xe2:m -Uhfuse:w:0x
 ```
 
 ### Circuit
+
+#### Components
+* 1x LED
+* 1x Resistor 330 ohm for the LED
+* 1x Resistor 10K for the ATmega328p
+* 1x AVR microcontroller
+* 1x AVR programmer
+
 <img src="../../../images/circuit-int-clock-led.jpg">
