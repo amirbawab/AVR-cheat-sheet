@@ -3,14 +3,41 @@
 *The Following Cheat Sheet is built based on the ATmega328p, but other AVR microcontroller should follow similar steps.*
 
 ### Table of Contents
+
 * [Datasheet](#datasheet)
+    * [ATmega328p](#atmega328p)
 * [Packages](#packages)
+    * [Arch linux](#arch-linux)
 * [Microcontroller](#microcontroller)
+    * [ATmega328p](#atmega328p-1)
 * [Programmer](#programmer)
+    * [Sparkfun Pocket AVR Programmer](#sparkfun-pocket-avr-programmer)
+    * [USBASP USBISP AVR Programmer](#usbasp-usbisp-avr-programmer)
+    * [Programmer circuit](#programmer-circuit)
 * [Eclipse](#eclipse)
+    * [Installation](#installation)
+    * [Create a new project](#create-a-new-project)
+    * [Configure project](#configure-project)
+    * [Configure fuse bits](#configure-fuse-bits)
+    * [Build and upload from Eclipse](#build-and-upload-from-eclipse)
 * [Manually (no IDE)](#manually-no-ide)
+    * [Build and upload manually](#build-and-upload-manually)
+    * [Reset fuse bytes to default values manually](#reset-fuse-bytes-to-default-values-manually)
+    * [Read fuse bytes manually](#read-fuse-bytes-manually)
 * [Input/Output](#inputoutput)
+    * [Introduction](#introduction)
+    * [DDRx](#ddrx)
+    * [PORTx](#portx)
+    * [PINx](#pinx)
 * [Fuse bits](#fuse-bits)
+    * [Introduction](#introduction-1)
+    * [Low fuse byte](#low-fuse-byte)
+    * [High fuse byte](#high-fuse-byte)
+    * [Extended fuse byte](#extended-fuse-byte)
+* [Clock source](#clock-source)
+    * [AVR Clock](#avr-clock)
+    * [Why using external clock source](#why-using-external-clock-source)
+* [Examples](#examples)
 * [Contributing](#contributing)
 * [Resources](#resources)
 
@@ -246,6 +273,10 @@ By default the ATmega328p internal RC Oscillator provides an 8.0Mhz clock. Also 
 
 #### Why using external clock source
 External clock source, such as an external crystal oscillator, is sometimes important because it provides a more accurate timing than the one offered by the internal RC oscillator integrated in the AVR. A more accurate clock is required when the program developed depends on a very accurate clock (e.g. Timer) or envolves USB related functionalities where timing is curicial. However, adding an external crystal oscillator consumes more power, resulting in quickly draining the batteries.
+
+### Examples
+Some example files has been provided for further explanation
+* <a href="examples">Example directory</a>
 
 ### Contributing
 * Edit README.md
