@@ -283,6 +283,14 @@ Example for using internal and external clock source can be found in the section
 * Each INTx pin have its own interrupt vector making it simple for the developer to listen for an event on that specific pin. On the other hand, a PCINTx pin shares an interrupt vector with several others, so listening for an event on that specific pin requires additional steps in order to mask out the other PCINTx pins in the same vector. To know which PCINTx pins share the same interrupt vector, refer to you AVR datashete at section "EXINT - External Interrupts".
 * INTx can report events under several situations (For ATmega328p: low, falling, rising, any). PCINTx report events on any change.
 
+#### Configure INTx
+* In general, the Data Direction value (DDxn) for INTx is set to "input", and the port value (PORTxn) is set to high (enable pull-up resitor). However, setting the Data Direction for INTx to "output" will still trigger an event.
+* As explained above, the INTx can report event on different degrees. To specify this degree level, refer to the datasheet at section "External Interrupt Control Register A" in order to set the value for `EICRA`.
+* The ATmega328p has two INTx pins (INT0 and INT1). To specify the used one(s), set the value for `EIMSK` by checking the options in the datasheet at section "External Interrupt Mask Register".
+* To activate interrupts use `sei()` and to deactivate them use `cli()`.
+
+#### Configure PCINTx
+
 #### Example of external interrputs
 Example for using external interrupts can be found in the section [Examples](#examples)
 
