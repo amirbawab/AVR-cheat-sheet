@@ -81,7 +81,7 @@ Circuit (1): If the AVR fuse bits are configured to use the internal oscillator
 (default values from the datasheet)
 <img src="images/circuit-programmer-1.jpg"/>  
 
-Circuit (2): If the AVR fuse bits are configured to use an external oscillator
+Circuit (2): If the AVR fuse bits are configured to use an external clock source
 <img src="images/circuit-programmer-2.jpg"/>  
 
 *Note: For more details about fuse bits please refer to the [Fuse bits](#fuse-bits) section*
