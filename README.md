@@ -274,6 +274,9 @@ By default the ATmega328p internal RC Oscillator provides an 8.0Mhz clock. Also 
 #### Why using external clock source
 External clock source, such as an external crystal oscillator, is sometimes important because it provides a more accurate timing than the one offered by the internal RC oscillator integrated in the AVR. A more accurate clock is required when the program developed depends on a very accurate clock (e.g. Timer) or envolves USB related functionalities where timing is curicial. However, adding an external crystal oscillator consumes more power, resulting in quickly draining the batteries.
 
+#### Example of clock source
+Example for using internal and external clock source can be found in the seciont [Examples](#examples)
+
 ### Examples
 Some example files has been provided for further explanation
 * <a href="examples">Example directory</a>
