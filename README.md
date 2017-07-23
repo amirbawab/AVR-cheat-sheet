@@ -55,7 +55,8 @@ PDF from <a href="http://www.atmel.com/Images/Atmel-42735-8-bit-AVR-Microcontrol
 ### Microcontroller
 #### ATmega328p
 ##### Image:
-<img src="imoages/atmega328p.jpg"/>  
+
+<img src="images/atmega328p.jpg"/>  
 
 ##### ASCII
 *Search for pins*
