@@ -293,8 +293,8 @@ Example for using internal and external clock source can be found in the section
 * To handle events from INTx, use the following function `ISR(INTx_vect){...}`
 
 #### Configure PCINTx
-* In general, the Data Direction value (DDxn) for INTx is set to "input", and the port value (PORTxn) is set to high (enable pull-up resitor). However, setting the Data Direction for INTx to "output" will still trigger an event.
-* Set the range of pins which the interrupt handler will be listening to. This can be done by setting the value for the `PCICR` with corresponding range(s). Details about setting this register can be found in the datasheet at section "Pin Change Interrupt Control Register".
+* In general, the Data Direction value (DDxn) for PCINTx is set to "input", and the port value (PORTxn) is set to high (enable pull-up resitor). However, setting the Data Direction for PCINTx to "output" will still trigger an event.
+* Set the range of pins that will cause an interrupt. This can be done by setting the value for the `PCICR` to the corresponding range(s). Details about setting this register can be found in the datasheet at section "Pin Change Interrupt Control Register".
 * In the selected ranges, mask out the pins that will not provide any interrupts by setting the value for `PCMSKx` where `x` is the group index for the selected pin range. If more than one range is selected, then multiple `PCMSKx` should be defined. For more information about the values for that register refer to the datasheet at section "Pin Change Mask Register ...".
 * To activate interrupts use `sei()` and to deactivate them use `cli()`.
 * To handle events from PCINTx, use the following function `ISR(PCINTy_vect){...}` where `y` is the group index of the selected range pins.
