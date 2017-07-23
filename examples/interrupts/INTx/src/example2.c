@@ -1,9 +1,12 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include <util/delay.h>
 
 #ifndef F_CPU
 #define F_CPU 1000000UL
 #endif
+
+int intFlag = 0;
 
 int main(void) {
 
@@ -24,12 +27,22 @@ int main(void) {
     // Set DDC5 to output
     DDRC |= (1 << DDC5);
 
-    // Enable interrupts
-    sei();
-
     // Loop forever
     while(1){
-    	// Do nothing
+    	if(intFlag == 0) {
+			// Enable interrupts
+			sei();
+    	} else {
+
+    		// Disable interrupts
+    		cli();
+
+    		// Debouncing by delaying for 1000ms
+    		_delay_ms(1000);
+
+    		// Reset flag to re-enable interrupts
+    		intFlag = 0;
+    	}
     }
     return 0;
 }
@@ -38,5 +51,8 @@ int main(void) {
 ISR (INT0_vect) {
 
 	// Toggle LED
-    PORTC ^= (1 << PORTC5);
+	PORTC ^= (1 << PORTC5);
+
+	// Raise flag to disable interrupts
+	intFlag = 1;
 }
