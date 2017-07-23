@@ -14,7 +14,7 @@ int main(void) {
     PORTD |= (1 << PORTD2);
 
     // Set External Interrupt Control Register A
-    // to 00: The low level of INT1 generates an interrupt request.
+    // to 00: The low level of INT0 generates an interrupt request.
     EICRA |= (1 << ISC00);
 
     // Set External Interrupt Mask Register
