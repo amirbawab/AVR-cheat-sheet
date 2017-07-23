@@ -315,9 +315,20 @@ Some example files has been provided for further explanation
 * Click on "Propose file change" and then on "Create pull request"
 
 ### Resources
+#### Websites
 * https://www.sparkfun.com/
 * https://aaroneiche.com/2016/11/06/programming-avrs-using-a-usbasp-on-a-mac/
 * http://www.avr-tutorials.com/digital/about-avr-8-bit-microcontrollers-digital-io-ports
 * http://www.ladyada.net/learn/avr/fuses.html
 * http://treehouseprojects.ca/fusebits/
 * http://www.instructables.com/id/How-to-change-fuse-bits-of-AVR-Atmega328p-8bit-mic/
+
+#### YouTube
+* NewbieHack - Microcontroller Tutorial - A Beginners, by Patrick Hood-Daniel
+  * https://www.youtube.com/playlist?list=PLE72E4CFE73BD1DE1
+
+* Learning AVR-C, by humanHardDrive
+  * https://www.youtube.com/playlist?list=PLA6BB228B08B03EDD
+
+* Atmel Programming Tutorial, by Chris Dahms
+  * https://www.youtube.com/playlist?list=PLoLaqVexEviMZu55Y4JO66b4xIv5K-D1L
