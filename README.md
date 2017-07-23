@@ -54,7 +54,31 @@ PDF from <a href="http://www.atmel.com/Images/Atmel-42735-8-bit-AVR-Microcontrol
 
 ### Microcontroller
 #### ATmega328p
-<img src="images/atmega328p.jpg"/>  
+##### Image:
+<img src="imoages/atmega328p.jpg"/>  
+
+##### ASCII
+*Search for pins*
+```
+                          ATmega328p
+                          +---------+
+(PCINT14/RESET)      PC6 /|1  \_/ 28|\ PC5 (ADC5/SCL/PCINT13)
+(PCINT16/RXD)        PD0 /|2      27|\ PC4 (ADC4/SDA/PCINT12)
+(PCINT17/TXD)        PD1 /|3      26|\ PC3 (ADC3/PCINT11)
+(PCINT18/INT0)       PD2 /|4      25|\ PC2 (ADC2/PCINT10)
+(PCINT19/OC2B/INT1)  PD3 /|5      24|\ PC1 (ADC1/PCINT9)
+(PCINT20/XCK/T0)     PD4 /|6      23|\ PC0 (ADC0/PCINT8)
+VCC                      /|7      22|\     GND
+GND                      /|8      21|\     AREF
+(PCINT6/XTAL1/TOSC1) PB6 /|9      20|\     AVCC
+(PCINT7/XTAL2/TOSC2) PB7 /|10     19|\ PB5 (SCK/PCINT5)
+(PCINT21/OC0B/T1)    PD5 /|11     18|\ PB4 (MISO/PCINT4)
+(PCINT22/OC0A/AIN0)  PD6 /|12     17|\ PB3 (MOSI/OC2A/PCINT3)
+(PCINT23/AIN1)       PD7 /|13     16|\ PB2 (SS/OC1B/PCINT2)
+(PCINT0/CLKO/ICP1)   PB0 /|14     15|\ PB1 (OC1A/PCINT1)
+                          +---------+
+
+```
 
 ### Programmer
 #### Sparkfun Pocket AVR Programmer
@@ -278,7 +302,6 @@ External clock source, such as an external crystal oscillator, is sometimes impo
 Example for using internal and external clock source can be found in the section [Examples](#examples)
 
 ### External interrupts
-
 #### Difference between INTx and PCINTx
 * There are only few INTx pins but there are a lot more PCINTx pins.
 * Each INTx pin have its own interrupt vector making it simple for the developer to listen for an event on that specific pin. On the other hand, a PCINTx pin shares an interrupt vector with several others, so listening for an event on that specific pin requires additional steps in order to mask out the other PCINTx pins in the same vector. To know which PCINTx pins share the same interrupt vector, refer to you AVR datashete at section "EXINT - External Interrupts".
@@ -301,6 +324,10 @@ Example for using internal and external clock source can be found in the section
 
 #### Example of external interrputs
 Example for using external interrupts can be found in the section [Examples](#examples)
+
+### Timer
+#### Introduction
+The ATmega328p 
 
 ### Examples
 Some example files has been provided for further explanation
