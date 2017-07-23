@@ -1,6 +1,6 @@
 # External interrupts using INTx
 
-The following examples demonstrate how to use a switch on INT0. The goal of the examples is to toggle an LED on each button press. In order to make the switch work on INT1, just change the values of `EIMSK` and `EICRA`. Refer to the cheat sheet for further details.
+The following examples demonstrate how to use a switch on INT0. The goal of the examples is to toggle an LED on each button press. Chaning to another INTx follows the same logic described below. Refer to the cheat sheet for further details.
 
 ## Example 1
 * Blink LED on each button press
