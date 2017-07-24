@@ -340,9 +340,7 @@ ATmega328p has three fuse bytes composed of 8 fuse bits each, responsible for th
 ```
 
 ### Clock source
-#### AVR Clock
-*Note: If you have an AVR microcontroller other than the ATmega328p, then you can check the values below in your datasheet under the section "Calibrated Internal RC Oscillator".*
-
+#### Introduction
 By default the ATmega328p internal RC Oscillator provides an 8.0Mhz clock. Also the default fuse bit CKDIV8 is programmed which divides the internal frequency by 8 (8.0Mhz / 8 = 1.0Mhz). To make the chip work on an 8Mhz frequency (maximum clock speed), the CKDIV8 bit must be unprogrammed. If more than 8Mhz is needed then avoid overclocking your AVR (can misbehave), instead use an external clock source. 
 
 *Note: For more details about fuse bits CKDIV8 configuration, check the [Fuse bits](#fuse-bits) section.*
