@@ -332,7 +332,7 @@ The ATmega328p has two 8-bit timers and one 16-bit timer. The 8-bit timers count
 timer counts up to 65,536.
 
 #### TTCR0A
-**TCCR0A **: Timer/Counter 0 Control Register A  
+**Name**: Timer/Counter 0 Control Register A  
 **Datasheet**: 19.9.1. TC0 Control Register A  
 **Description**: Set the timer mode.  
 **Value**:   
