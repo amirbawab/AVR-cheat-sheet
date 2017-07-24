@@ -354,7 +354,7 @@ By default the ATmega328p internal RC Oscillator provides an 8.0Mhz clock. Also 
 External clock source, such as an external crystal oscillator, is sometimes important because it provides a more accurate timing than the one offered by the internal RC oscillator integrated in the AVR. A more accurate clock is required when the program developed depends on a very accurate clock (e.g. Timer) or envolves USB related functionalities where timing is curicial. However, adding an external crystal oscillator consumes more power, resulting in quickly draining the batteries.
 
 ### Clock sources
-**Datasheet**: Table 13-1. Device Clocking Options Select
+**Datasheet**: Table 13-1. Device Clocking Options Select  
 **Description**: Configure the fuse bits CKSEL[3:0].
 ```
 +-----------------------------------+---------------------+------------------------------------------------+--------------------+
@@ -401,8 +401,6 @@ External clock source, such as an external crystal oscillator, is sometimes impo
 +---------------------+------------+---------------------------------------------------------------------+
 ```
 
----
-
 **Datasheet**: Table 13-4. Start-up Times for the Low Power Crystal Oscillator Clock Selection
 ```
 +-----------------------------+-------------------------------+-----------------------+--------+----------+
@@ -444,8 +442,6 @@ External clock source, such as an external crystal oscillator, is sometimes impo
 | 0.4 - 20            | 011        |                  12 - 22                      |
 +---------------------+------------+-----------------------------------------------+
 ```
-
----
 
 **Datasheet**: Table 13-6. Start-Up Times for the Full Swing Crystal Oscillator Clock Selection
 ```
@@ -492,8 +488,6 @@ External clock source, such as an external crystal oscillator, is sometimes impo
 +------------+---------------------------+------------------------------+
 ```
 
----
-
 **Datasheet**: Table 13-12. Start-Up Times for the Internal Calibrated RC Oscillator Clock Selection - SUT
 ```
 +-------------------+-------------------------------+-----------------------------+----------+
@@ -520,8 +514,6 @@ External clock source, such as an external crystal oscillator, is sometimes impo
 |    7.3 - 8.1        |    0010    |
 +---------------------+------------+
 ```
-
----
 
 **Datasheet**: Table 13-12. Start-Up Times for the Internal Calibrated RC Oscillator Clock Selection - SUT
 ```
@@ -552,8 +544,6 @@ External clock source, such as an external crystal oscillator, is sometimes impo
 +---------------------+------------+---------------------------------------------------------+
 ```
 
----
-
 **Datasheet**: Table 13-14. Start-Up Times for the 128kHz Internal Oscillator
 ```
 +------------------+-------------------------------+-----------------------------+----------+
@@ -581,8 +571,6 @@ External clock source, such as an external crystal oscillator, is sometimes impo
 | 0 - 20MHz  |    0000    |
 +------------+------------+
 ```
-
----
 
 **Datasheet**: Table 13-16. Start-Up Times for the External Clock Selection - SUT
 ```
