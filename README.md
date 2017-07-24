@@ -54,12 +54,6 @@ PDF from <a href="http://www.atmel.com/Images/Atmel-42735-8-bit-AVR-Microcontrol
 
 ### Microcontroller
 #### ATmega328p
-##### Image:
-
-<img src="images/atmega328p.jpg"/>  
-
-##### ASCII
-*Search for pins*
 ```
                           ATmega328p
                           +---------+
@@ -78,7 +72,6 @@ GND                      /|8      21|\     AREF
 (PCINT23/AIN1)       PD7 /|13     16|\ PB2 (SS/OC1B/PCINT2)
 (PCINT0/CLKO/ICP1)   PB0 /|14     15|\ PB1 (OC1A/PCINT1)
                           +---------+
-
 ```
 
 ### Programmer
@@ -332,7 +325,7 @@ The ATmega328p has two 8-bit timers and one 16-bit timer. The 8-bit timers count
 timer counts up to 65,536.
 
 #### Timer 0 (TC0 8-bit)
-**Register**: TTCR0A  
+**Register**: TCCR0A  
 **Name**: Timer/Counter 0 Control Register A  
 **Datasheet**: 19.9.1. TC0 Control Register A  
 **Description**: Set the timer mode.  
@@ -366,14 +359,14 @@ timer counts up to 65,536.
 
 ---
 
-**Register**: TTCR0B  
+**Register**: TCCR0B  
 **Name**: Timer/Counter 0 Control Register B  
 **Datasheet**: 19.9.2. TC0 Control Register B  
 **Description**: Prescaler allows slowing down the timer by dividing the timer clock frequency by 1, 8, 64, etc...  
 **Value**:  
 ```
 +------+------+------+----------------------------------------------------- --+
-| CA02 | CA01 | CS00 | Description                                            |
+| CS02 | CS01 | CS00 | Description                                            |
 +------+------+------+----------------------------------------------------- --+
 |   0  |   0  |   0  | No clock source (Timer/Counter stopped)                |
 +------+------+------+----------------------------------------------------- --+
@@ -399,8 +392,7 @@ timer counts up to 65,536.
 **Name**: Timer/Counter 0 Output Compare Register A  
 **Datasheet**: 19.9.6. TC0 Output Compare Register A  
 **Description**: This register contains an 8-bit value that is continuously compared with the counter value, 
-and when there is a match
-an Output Compare interrupt occures.  
+and when there is a match an Output Compare interrupt occures.  
 **Value**: It is common to calculate this value using an online timer calculator like 
 http://eleccelerator.com/avr-timer-calculator/.
 For example, given an ATmega328p with a clock of 1Mhz. Assume the timer that will be active is of 8-bits. 
@@ -410,6 +402,14 @@ in order to generate the total timer ticks required in order to get 1 second, th
 Please note that the value provided by the calculator might be greater than 255 (active timer is only 8-bit).
 If that is the case, then try setting the desired time to something small (e.g. 0.1s, 0.01s, etc...), 
 and from the C program keep a counter that will determine when 1 second has passed.
+
+---
+
+**Register**: OCR0B  
+**Name**: Timer/Counter 0 Output Compare Register B  
+**Datasheet**: 19.9.7. TC0 Output Compare Register B  
+**Description**: Refer to OCR0A  
+**Value**: Refer to OCR0A  
 
 ---
 
@@ -481,6 +481,35 @@ and from the C program keep a counter that will determine when 1 second has pass
 +------+-------+-------+-------+-------+-------------------+--------+-----------+-----------+
 |  15  |   1   |   1   |   1   |   1   |      Fast PWM     | OCR1A  |  BOTTOM   |    TOP    |
 +------+-------+-------+-------+-------+-------------------+--------+-----------+-----------+
+```
+
+---
+
+**Register**: TCCR1B  
+**Name**: Timer/Counter 1 Control Register B  
+**Datasheet**: 20.14.2. TC1 Control Register B  
+**Description**: Set the timer mode.  
+**Value**:
+```
++------+------+------+----------------------------------------------------- --+
+| CS12 | CS11 | CS10 | Description                                            |
++------+------+------+----------------------------------------------------- --+
+|   0  |   0  |   0  | No clock source (Timer/Counter stopped)                |
++------+------+------+----------------------------------------------------- --+
+|   0  |   0  |   1  | clk/1 (No prescaling)                                  |
++------+------+------+----------------------------------------------------- --+
+|   0  |   1  |   0  | clk/8 (From prescaler)                                 |
++------+------+------+----------------------------------------------------- --+
+|   0  |   1  |   1  | clk/64 (From prescaler)                                |
++------+------+------+----------------------------------------------------- --+
+|   1  |   0  |   0  | clk/256 (From prescaler)                               |
++------+------+------+----------------------------------------------------- --+
+|   1  |   0  |   1  | clk/1024 (From prescaler)                              |
++------+------+------+----------------------------------------------------- --+
+|   1  |   1  |   0  | External clock source on T1 pin. Clock on falling edge |
++------+------+------+----------------------------------------------------- --+
+|   1  |   1  |   1  | External clock source on T1 pin. Clock on rising edge  |
++------+------+------+--------------------------------------------------------+
 ```
 
 ### Examples
