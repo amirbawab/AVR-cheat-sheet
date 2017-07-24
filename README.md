@@ -2,7 +2,7 @@
 
 *The Following Cheat Sheet is built based on the ATmega328p, but other AVR microcontroller should follow similar steps.*
 
-### Table of Contents
+## Table of Contents
 
 * [Datasheet](#datasheet)
     * [ATmega328p](#atmega328p)
@@ -41,19 +41,19 @@
 * [Contributing](#contributing)
 * [Resources](#resources)
 
-### Datasheet
-#### ATmega328p
+## Datasheet
+### ATmega328p
 PDF from <a href="http://www.atmel.com/Images/Atmel-42735-8-bit-AVR-Microcontroller-ATmega328-328P_Datasheet.pdf">Atmel</a>
 
-### Packages
-#### Arch linux
+## Packages
+### Arch linux
 * avr-binutils
 * avr-gcc
 * avr-libc
 * avrdude
 
-### Microcontroller
-#### ATmega328p
+## Microcontroller
+### ATmega328p
 ```
                           ATmega328p
                           +---------+
@@ -74,16 +74,16 @@ GND                      /|8      21|\     AREF
                           +---------+
 ```
 
-### Programmer
-#### Sparkfun Pocket AVR Programmer
+## Programmer
+### Sparkfun Pocket AVR Programmer
 The device was tested on Ubuntu 16.04 and Arch linux  
 <img width="300" src="images/usbtiny-programmer.jpg"/>  
 
-#### USBASP USBISP AVR Programmer
+### USBASP USBISP AVR Programmer
 The device was tested on Arch linux  
 <img width="300" src="images/usbasp-programmer.jpg"/>
 
-#### Programmer circuit
+### Programmer circuit
 Components for circuit (1) and (2):
 * 1x ATmega328p
 * 1x Resistor 10K ohm
@@ -109,20 +109,20 @@ For AVR Programming cable with 6 pins:
 For AVR Programming cable with 10 pins:  
 <img width="300" src="images/connections-10.jpg"/>  
 
-### Eclipse
-#### Installation
+## Eclipse
+### Installation
 * Install Eclipse C/C++
 * Install plugin:
   * From Eclipse, go to **Help** > **Eclipse Marketplace**
   * Search for and install **AVR Eclipse Plugin**
 
-#### Create a new project
+### Create a new project
 * Create a new C Project
   * Select **AVR Cross Target Application** > **Empty Project** as project type
   * Select **AVR-GCC Toolchain** in the Toolchains box
 * Press **Finish**
 
-#### Configure project
+### Configure project
 * In **Project Explorer** select the AVR project
 * Go to **Project** > **Properties**
 * Expand **C/C++ Build** then select **Settings**
@@ -151,7 +151,7 @@ For instance, consider some IO functionality is required in the C program writte
 
 From: http://www.atmel.com/webdoc/avrlibcreferencemanual/group__avr__io.html
 
-#### Configure fuse bits
+### Configure fuse bits
 * In **Project Explorer** select the AVR project
 * Go to **Project** > **Properties**
 * Expand **AVR** then select **AVRDude**
@@ -159,15 +159,15 @@ From: http://www.atmel.com/webdoc/avrlibcreferencemanual/group__avr__io.html
 * *Note: A wrong configuration can prevent you from reprogramming your AVR.*
 * Done! Click **Apply and Close**
 
-#### Build and upload from Eclipse
+### Build and upload from Eclipse
 * Write a small C program for your AVR microntroller
 * Build the project
 * Do the required wiring between the AVR microcontroller and the programmer refer to the [Programmer](#programmer) section.
 * Plug the programmer into your machine
 * Go to **AVR** > **Upload Project to Target Device**
 
-### Manually (no IDE)
-#### Build and upload manually
+## Manually (no IDE)
+### Build and upload manually
 * Write a small C program for your AVR microcontroller
 * Generate object file: 
 ```
@@ -188,7 +188,7 @@ avrdude -c usbasp -p m328p -U flash:w:avr.hex
 
 Use <a href="script/ATmega328-upload.sh">ATmega328-upload.sh</a> script file to buid a C program and upload its hex to the ATmega328p (The script file uses the commands described above). 
 
-#### Reset fuse bytes to default values manually
+### Reset fuse bytes to default values manually
 * From the [Fuse Bits](#fuse-bits) section, locate the **Fuse Low Byte** table
   * Write down the **Default value** top-down (Bits#: 7...0): 01100010 (binary) = 0x62 (hex)
 * Locate the **Fuse High Byte** table
@@ -201,7 +201,7 @@ avrdude -p m328p -c usbasp -Ulfuse:w:0x62:m -Uhfuse:w:0xd9:m -Uefuse:w:0xff:m
 ```
   * Remeber to update the `-c` switches to match your programmer. For more details check [Build and upload manually](#build-and-upload-manually).
 
-#### Read fuse bytes manually
+### Read fuse bytes manually
 * Reading fuse bits is done using `avrdude` command.
 ```
 avrdude -c usbasp -p m328p -U lfuse:r:-:h -U hfuse:r:-:h -U efuse:r:-:h
@@ -209,15 +209,15 @@ avrdude -c usbasp -p m328p -U lfuse:r:-:h -U hfuse:r:-:h -U efuse:r:-:h
   * Remeber to update the `-c` switches to match your programmer. For more details check [Build and upload manually](#build-and-upload-manually).
   * The `-` symbol in each of the `-U` switches values tells the command to print the results on the screen. To write the output on a file, just replace `-` by a file path (e.g. `/tmp/low_fuse.hex`). 
 
-### Input/Output
-#### Introduction
+## Input/Output
+### Introduction
 Each Input/Output pin on the AVR microcontroller belong to a Port alphabet (e.g. Pin 28 on the ATmega328p belongs to Port C). Each of those pins has three register bits assigned to them: DDxn in DDRx, PORTxn in PORTx and PINxn in PINx.
 
 Source: [Datasheet](#datasheet) § 18.2.1. Configuring the Pin
 
 DDRx, PORTx and PINx registers consist of one byte each, allowing at most 8 physical pins to be configured per alphabet letter. 
 
-#### DDRx
+### DDRx
 ```
 +------+------+------+------+------+------+------+------+
 | DDx7 | DDx6 | DDx5 | DDx4 | DDx3 | DDx2 | DDx1 | DDx0 |
@@ -226,7 +226,7 @@ DDRx, PORTx and PINx registers consist of one byte each, allowing at most 8 phys
 Data Direction Register x allows specifying the direction of the I/O pins belonging to the Port x.  
 If the bit 1 was written to DDx0, then Px0 direction is "output". If the bit 0 was written, then Px0 direction is "input".
 
-#### PORTx
+### PORTx
 ```
 +--------+--------+--------+--------+--------+--------+--------+--------+
 | PORTx7 | PORTx6 | PORTx5 | PORTx4 | PORTx3 | PORTx2 | PORTx1 | PORTx0 |
@@ -236,7 +236,7 @@ Port x register has two functionalities depending on the Data Direction Register
 If DDx0 is set to "input", then writing 1 at PORTx0 activates the pull-up resistor at Px0, and writing 0 deactivates it at Px0.  
 If DDx0 is set to "output", then writing 1 at PORTx0 drives Px0 high, and writing 0 drives Px0 low. 
 
-#### PINx
+### PINx
 ```
 +-------+-------+-------+-------+-------+-------+-------+-------+
 | PINx7 | PINx6 | PINx5 | PINx4 | PINx3 | PINx2 | PINx1 | PINx0 |
@@ -244,11 +244,11 @@ If DDx0 is set to "output", then writing 1 at PORTx0 drives Px0 high, and writin
 ```
 Pin x register allows reading the values on the pins with "input" direction. For instance, if DDx0 is set to "input", then PINx0 can be used to read the input value.
 
-### Fuse bits
-#### Introduction
+## Fuse bits
+### Introduction
 ATmega328p has three fuse bytes composed of 8 fuse bits each, responsible for the behavior of the chip. The bits are programmable and nonvolatile (the fuse bits programmed dont change their values the next time the chip is active). Writing 1 into a fuse bit sets it to unprogrammed and 0 sets it to programmed.
 
-#### Low fuse byte
+### Low fuse byte
 **Description**: The low fuse byte enables controlling the speed, start up time and the source of the clock. Furthermore, it allows exposing the system clock output on PORTB0. Refer to [datasheet](#datasheet) at section "Clock Output Buffer".  
 **Datasheet**: Table 31-7. Fuse Low Byte  
 **Table**:
@@ -262,9 +262,9 @@ ATmega328p has three fuse bytes composed of 8 fuse bits each, responsible for th
 | CKOUT         |    6    | Clock output            | 1 (unprogrammed) | Expose the system clock output on   |
 |               |         |                         |                  | PORTB0.
 +---------------+---------+-------------------------+------------------+-------------------------------------+
-| SUT1          |    5    | Select start-up time    | 1 (unprogrammed) | Set the clock start up time.        |
-+---------------+---------+-------------------------+------------------+                                     |
-| SUT0          |    4    | Select start-up time    | 0 (programmed)   |                                     |
+| SUT1          |    5    | Select start-up time    | 1 (unprogrammed) | Set the clock start up time         |
++---------------+---------+-------------------------+------------------+ providing enough cycles before it   |
+| SUT0          |    4    | Select start-up time    | 0 (programmed)   | can be considered stable.           |
 +---------------+---------+-------------------------+------------------+-------------------------------------+
 | CKSEL3        |    3    | Select Clock source     | 0 (programmed)   | By default the internal clock is    |
 +---------------+---------+-------------------------+------------------+ used.                               |
@@ -276,7 +276,10 @@ ATmega328p has three fuse bytes composed of 8 fuse bits each, responsible for th
 +---------------+---------+-------------------------+------------------+-------------------------------------+
 ```
 
-#### High fuse byte
+* To know how the CKSEL[3:0] and SUT[1:0] should be configured, check section [Clock sources](#clock-sources).
+* An example is provided in the [example](#example) section.
+
+### High fuse byte
 **Description**: The high fuse byte is responsible for various type of configuration.  
 **Datasheet**: Table 31-6. Fuse High Byte  
 **Table**:  
@@ -310,7 +313,7 @@ ATmega328p has three fuse bytes composed of 8 fuse bits each, responsible for th
 +----------------+---------+----------------------------+------------------+-------------------------------------+
 ```
 
-#### Extended fuse byte
+### Extended fuse byte
 **Description**: If the ATmega chips is offered a poor voltage, it can become unstable and possibly misbehave. Therefore, the extended fuse byte allows setting a BOD (Brown-Out Detector) threshold voltage determining if the chip should stay active or should reset.  
 **Datasheet**: Table 31-5. Extended Fuse Byte for ATmega328/P  
 **Table**:  
@@ -339,48 +342,297 @@ ATmega328p has three fuse bytes composed of 8 fuse bits each, responsible for th
 +--------------------+---------+----------------------------+------------------+-------------------------------------+
 ```
 
-### Clock source
-#### Introduction
+## Clock source
+### Introduction
 By default the ATmega328p internal RC Oscillator provides an 8.0Mhz clock. Also the default fuse bit CKDIV8 is programmed which divides the internal frequency by 8 (8.0Mhz / 8 = 1.0Mhz). To make the chip work on an 8Mhz frequency (maximum clock speed), the CKDIV8 bit must be unprogrammed. If more than 8Mhz is needed then avoid overclocking your AVR (can misbehave), instead use an external clock source. 
 
 *Note: For more details about fuse bits CKDIV8 configuration, check the [Fuse bits](#fuse-bits) section.*
 
-#### Why using external clock source
+### Why using external clock source
 External clock source, such as an external crystal oscillator, is sometimes important because it provides a more accurate timing than the one offered by the internal RC oscillator integrated in the AVR. A more accurate clock is required when the program developed depends on a very accurate clock (e.g. Timer) or envolves USB related functionalities where timing is curicial. However, adding an external crystal oscillator consumes more power, resulting in quickly draining the batteries.
 
-#### Example of clock source
+### Clock sources
+**Datasheet**: Table 13-1. Device Clocking Options Select
+**Description**: Configure the fuse bits CKSEL[3:0].
+```
++-----------------------------------+---------------------+------------------------------------------------+--------------------+
+| Device Clocking Option            | CKSEL[3:0]          | Description                                    | Go to section      |
++-----------------------------------+---------------------+------------------------------------------------+--------------------+
+| Low Power Crystal Oscillator      | From 1111 to 1000   | Gives the lowest power consumption, but is not | Low Power Crystal  |
+|                                   |                     | capable of driving other clock inputs, and may | Oscillator         |
+|                                   |                     | be more susceptible to noise in noisy env.     |                    |
++-----------------------------------+---------------------+------------------------------------------------+--------------------+
+| Full Swing Crystal Oscillator     | From 0111 to 0110   | Useful for driving other clock inputs and in   | Full Swing Crystal | 
+|                                   |                     | noisy environments.                            | Oscillator         |
++-----------------------------------+---------------------+------------------------------------------------+--------------------+
+| Low Frequency Crystal Oscillator  | From 0101 to 0100   | Optimized for very low power consumption, and  | Low Frequency      |
+|                                   |                     | thus when selecting crystals, consider the MAX | Crystal Oscillator |
+|                                   |                     | ESR recommendations.                           |                    |
++-----------------------------------+---------------------+------------------------------------------------+--------------------+
+| Internal 128kHz RC Oscillator     | 0011                | Low power Oscillator providing a clock of      | 128kHz Internal    |
+|                                   |                     | 128kHz. Frequency is normal at 3V and 25°      | Oscillator         |
++-----------------------------------+---------------------+------------------------------------------------+--------------------+
+| Calibrated Internal RC Oscillator | 0010                | ATmega328p is shipped with this configuration. | Calibrated         |
+|                                   |                     |                                                | Internal RC Osci.  |
++-----------------------------------+---------------------+------------------------------------------------+--------------------+
+| External Clock                    | 0000                | Drive device from an external clock source     | External Clock     |
++-----------------------------------+---------------------+------------------------------------------------+--------------------+
+| Reserved                          | 0001                |                       -                        |        -           |
++-----------------------------------+---------------------+------------------------------------------------+--------------------+
+```
+
+#### Low Power Crystal Oscillator
+**Datasheet**: Table 13-3. Low Power Crystal Oscillator Operating Modes
+```
++---------------------+------------+----------------------+----------------------------------------------+
+| Frequency Range Mhz | CKSEL[3:1] | Range for Capacitors | Note                                         |
+|                     |            | C1 and C2 pf | Note  |                                              |
++---------------------+------------+----------------------+----------------------------------------------+
+| 0.4 - 0.9           |    100     |          -           | This option should not be used with crystal, |
+|                     |            |                      | only with ceramic resonators.                |
++---------------------+------------+---------------------------------------------------------------------+
+| 0.9 - 3.0           |    101     |       12 - 22        |                                              |
++---------------------+------------+---------------------------------------------------------------------+
+| 3.0 - 8.0           |    110     |       12 - 22        |                                              |
++---------------------+------------+---------------------------------------------------------------------+
+| 8.0 - 16.0          |    111     |       12 - 22        |                                              |
++---------------------+------------+---------------------------------------------------------------------+
+```
+
+---
+
+**Datasheet**: Table 13-4. Start-up Times for the Low Power Crystal Oscillator Clock Selection
+```
++-----------------------------+-------------------------------+-----------------------+--------+----------+
+| Oscillator Source/Power     | Start-up Time from Power-down | Additional Delay from | CKSEL0 | SUT[1:0] |
+| Conditions                  | and Power-save                | Reset (Vcc = 5.0V)    |        |          |
++-----------------------------+-------------------------------+-----------------------+--------+----------+
+| Ceramic resonator, fast     | 258 CK                        | 14CK + 4.1ms          | 0      | 00       |
+| rising power                |                               |                       |        |          |
++-----------------------------+-------------------------------+-----------------------+--------+----------+
+| Ceramic resonator, slowly   | 258 CK                        | 14CK + 65ms           | 0      | 01       |
+| rising power                |                               |                       |        |          |
++-----------------------------+-------------------------------+-----------------------+--------+----------+
+| Ceramic resonator, BOD      | 1K CK                         | 14CK                  | 0      | 10       |
+| enabled                     |                               |                       |        |          |
++-----------------------------+-------------------------------+-----------------------+--------+----------+
+| Ceramic resonator, fast     | 1K CK                         | 14CK + 4.1ms          | 0      | 11       |
+| rising power                |                               |                       |        |          |
++-----------------------------+-------------------------------+-----------------------+--------+----------+
+| Ceramic resonator, slowly   | 1K CK                         | 14CK + 65ms           | 1      | 00       |
+| rising power                |                               |                       |        |          |
++-----------------------------+-------------------------------+-----------------------+--------+----------+
+| Crystal Oscillator, BOD     | 16K CK                        | 14CK                  | 1      | 01       |
+| enabled                     |                               |                       |        |          |
++-----------------------------+-------------------------------+-----------------------+--------+----------+
+| Crystal Oscillator, fast    | 16K CK                        | 14CK + 4.1ms          | 1      | 10       |
+| rising power                |                               |                       |        |          |
++-----------------------------+-------------------------------+-----------------------+--------+----------+
+| Crystal Oscillator, slowly  | 16K CK                        | 14CK + 65ms           | 1      | 11       |
+| rising power                |                               |                       |        |          |
++-----------------------------+-------------------------------+-----------------------+--------+----------+
+```
+
+#### Full Swing Crystal Oscillator
+**Datasheet**: Table 13-5. Full Swing Crystal Oscillator operating modes
+```
++---------------------+------------+-----------------------------------------------+
+| Frequency Range MHz | CKSEL[3:1] | Recommended Range for Capacitors C1 and C2 pf |
++---------------------+------------+-----------------------------------------------+
+| 0.4 - 20            | 011        |                  12 - 22                      |
++---------------------+------------+-----------------------------------------------+
+```
+
+---
+
+**Datasheet**: Table 13-6. Start-Up Times for the Full Swing Crystal Oscillator Clock Selection
+```
++-----------------------------+-------------------------------+-----------------------+--------+----------+
+| Oscillator Source/Power     | Start-up Time from Power-down | Additional Delay from | CKSEL0 | SUT[1:0] |
+| Conditions                  | and Power-save                | Reset (Vcc = 5.0V)    |        |          |
++-----------------------------+-------------------------------+-----------------------+--------+----------+
+| Ceramic resonator, fast     | 258 CK                        | 14CK + 4.1ms          | 0      | 00       |
+| rising power                |                               |                       |        |          |
++-----------------------------+-------------------------------+-----------------------+--------+----------+
+| Ceramic resonator, slowly   | 258 CK                        | 14CK + 65ms           | 0      | 01       |
+| rising power                |                               |                       |        |          |
++-----------------------------+-------------------------------+-----------------------+--------+----------+
+| Ceramic resonator, BOD      | 1K CK                         | 14CK                  | 0      | 10       |
+| enabled                     |                               |                       |        |          |
++-----------------------------+-------------------------------+-----------------------+--------+----------+
+| Ceramic resonator, fast     | 1K CK                         | 14CK + 4.1ms          | 0      | 11       |
+| rising power                |                               |                       |        |          |
++-----------------------------+-------------------------------+-----------------------+--------+----------+
+| Ceramic resonator, slowly   | 1K CK                         | 14CK + 65ms           | 1      | 00       |
+| rising power                |                               |                       |        |          |
++-----------------------------+-------------------------------+-----------------------+--------+----------+
+| Crystal Oscillator, BOD     | 16K CK                        | 14CK                  | 1      | 01       |
+| enabled                     |                               |                       |        |          |
++-----------------------------+-------------------------------+-----------------------+--------+----------+
+| Crystal Oscillator, fast    | 16K CK                        | 14CK + 4.1ms          | 1      | 10       |
+| rising power                |                               |                       |        |          |
++-----------------------------+-------------------------------+-----------------------+--------+----------+
+| Crystal Oscillator, slowly  | 16K CK                        | 14CK + 65ms           | 1      | 11       |
+| rising power                |                               |                       |        |          |
++-----------------------------+-------------------------------+-----------------------+--------+----------+
+```
+
+#### Low Frequency Crystal Oscillator
+**Datasheet**: Table 13-9. Start-up Times for the Low-frequency Crystal Oscillator Clock Selection   
+```
++------------+---------------------------+------------------------------+
+| CKSEL[3:0] | Start-up Time from        | Recommended Usage            |
+|            | Power-down and Power-save |                              |
++------------+---------------------------+------------------------------+
+|    0100    |         1K CK             |                              |
++------------+---------------------------+------------------------------+
+|    0101    |        32k CK             | Stable frequency at start-up | 
++------------+---------------------------+------------------------------+
+```
+
+---
+
+**Datasheet**: Table 13-12. Start-Up Times for the Internal Calibrated RC Oscillator Clock Selection - SUT
+```
++-------------------+-------------------------------+-----------------------------+----------+
+| Power Conditions  | Start-Up Time from Power-down | Additional Delay from Reset | SUT[1:0] |
+|                   | and Power-Save                | (Vcc = 5.0V)                |          |
++-------------------+-------------------------------+-----------------------------+----------+
+| BOD enabled       |            6 CK               |           14CK              |    00    |
++-------------------+-------------------------------+-----------------------------+----------+
+| Fast rising power |            6 CK               |         14CK + 4.1ms        |    01    |
++-------------------+-------------------------------+-----------------------------+----------+
+| Slowly rising     |            6 CK               |         14CK + 65ms         |    10    |
+| power             |                               |                             |          |
++-------------------+-------------------------------+-----------------------------+----------+
+| Reserved          |             -                 |              -              |    11    |
++-------------------+-------------------------------+-----------------------------+----------+
+```
+
+#### Calibrated Internal RC Oscillator
+**Datasheet**: Table 13-11. Internal Calibrated RC Oscillator Operating Modes
+```
++---------------------+------------+
+| Frequency Range MHz | CKSEL[3:0] |
++---------------------+------------+
+|    7.3 - 8.1        |    0010    |
++---------------------+------------+
+```
+
+---
+
+**Datasheet**: Table 13-12. Start-Up Times for the Internal Calibrated RC Oscillator Clock Selection - SUT
+```
++------------------+-------------------------------+-----------------------------+----------+
+| Power Conditions | Start-Up Time from Power-down | Additional Delay from Reset | SUT[1:0] |
+|                  | and Power-Save                | (Vcc = 5.0V)                |          |
++------------------+-------------------------------+-----------------------------+----------+
+| BOD enabled      |             6 CK              |           14CK              |   00     |
++------------------+-------------------------------+-----------------------------+----------+
+| Fast rising      |             6 CK              |       14CK + 4.1ms          |   01     |
+| power            |                               |                             |          |
++------------------+-------------------------------+-----------------------------+----------+
+| Slowly rising    |             6 CK              |       14CK + 64ms           |   10     |
+| power            |                               |                             |          |
++------------------+-------------------------------+-----------------------------+----------+
+| Reserved         |              -                |             -               |   11     |
++------------------+-------------------------------+-----------------------------+----------+
+```
+
+#### 128kHz Internal Oscillator
+**Datasheet**: Table 13-13. 128kHz Internal Oscillator Operating Modes
+```
++---------------------+------------+---------------------------------------------------------+
+| Normal Frequency    | CKSEL[3:0] | Note                                                    |
++---------------------+------------+---------------------------------------------------------+
+|      128kHz         |    0011    | The 128kHz oscillator is a very low power clock source, |
+|                     |            | and is not designed for high accuracy.                  |
++---------------------+------------+---------------------------------------------------------+
+```
+
+---
+
+**Datasheet**: Table 13-14. Start-Up Times for the 128kHz Internal Oscillator
+```
++------------------+-------------------------------+-----------------------------+----------+
+| Power Conditions | Start-Up Time from Power-down | Additional Delay from Reset | SUT[1:0] |
+|                  | and Power-Save                |                             |          |
++------------------+-------------------------------+-----------------------------+----------+
+| BOD enabled      |             6 CK              |           14CK              |   00     |
++------------------+-------------------------------+-----------------------------+----------+
+| Fast rising      |             6 CK              |       14CK + 4ms            |   01     |
+| power            |                               |                             |          |
++------------------+-------------------------------+-----------------------------+----------+
+| Slowly rising    |             6 CK              |       14CK + 64ms           |   10     |
+| power            |                               |                             |          |
++------------------+-------------------------------+-----------------------------+----------+
+| Reserved         |              -                |             -               |   11     |
++------------------+-------------------------------+-----------------------------+----------+
+```
+
+#### External Clock
+**Datasheet**: Table 13-15. External Clock Frequency
+```
++------------+------------+
+| Frequency  | CKSEL[3:0] |
++------------+------------+
+| 0 - 20MHz  |    0000    |
++------------+------------+
+```
+
+---
+
+**Datasheet**: Table 13-16. Start-Up Times for the External Clock Selection - SUT
+```
++------------------+-------------------------------+-----------------------------+----------+
+| Power Conditions | Start-Up Time from Power-down | Additional Delay from Reset | SUT[1:0] |
+|                  | and Power-Save                | (Vcc = 5.0V)                |          |
++------------------+-------------------------------+-----------------------------+----------+
+| BOD enabled      |             6 CK              |           14CK              |   00     |
++------------------+-------------------------------+-----------------------------+----------+
+| Fast rising      |             6 CK              |       14CK + 4ms            |   01     |
+| power            |                               |                             |          |
++------------------+-------------------------------+-----------------------------+----------+
+| Slowly rising    |             6 CK              |       14CK + 65ms           |   10     |
+| power            |                               |                             |          |
++------------------+-------------------------------+-----------------------------+----------+
+| Reserved         |              -                |             -               |   11     |
++------------------+-------------------------------+-----------------------------+----------+
+```
+
+### Example of clock source
 Example for using internal and external clock source can be found in the section [Examples](#examples)
 
-### External interrupts
-#### Difference between INTx and PCINTx
+## External interrupts
+### Difference between INTx and PCINTx
 * There are only few INTx pins but there are a lot more PCINTx pins.
 * Each INTx pin have its own interrupt vector making it simple for the developer to listen for an event on that specific pin. On the other hand, a PCINTx pin shares an interrupt vector with several others, so listening for an event on that specific pin requires additional steps in order to mask out the other PCINTx pins in the same vector. To know which PCINTx pins share the same interrupt vector, refer to you AVR datashete at section "EXINT - External Interrupts".
 * INTx can report events under several situations (For ATmega328p: INT0:[low, any] and INT1:[falling, rising]). PCINTx report events on any change.
   * Note that as of revision B of the ATmega328p datasheet, there is a typo in the Interrupt Sense Control 0 and 1 tables. The fix is: ISC00 and ISC01 are for INT0, and ISC10 and ISC11 are for INT1.
 
-#### Configure INTx
+### Configure INTx
 * In general, the Data Direction value (DDxn) for INTx is set to "input", and the port value (PORTxn) is set to high (enable pull-up resitor). However, setting the Data Direction for INTx to "output" will still trigger an event.
 * As explained above, the INTx can report event on different degrees. To specify this degree level, refer to the datasheet at section "External Interrupt Control Register A" in order to set the value for `EICRA`.
 * The ATmega328p has two INTx pins (INT0 and INT1). To specify the used one(s), set the value for `EIMSK` by checking the options in the datasheet at section "External Interrupt Mask Register".
 * To activate interrupts use `sei()` and to deactivate them use `cli()`.
 * To handle events from INTx, use the following function `ISR(INTx_vect){...}`
 
-#### Configure PCINTx
+### Configure PCINTx
 * In general, the Data Direction value (DDxn) for PCINTx is set to "input", and the port value (PORTxn) is set to high (enable pull-up resitor). However, setting the Data Direction for PCINTx to "output" will still trigger an event.
 * Set the range of pins that will cause an interrupt. This can be done by setting the value for the `PCICR` to the corresponding range(s). Details about setting this register can be found in the datasheet at section "Pin Change Interrupt Control Register".
 * In the selected ranges, mask out the pins that will not provide any interrupts by setting the value for `PCMSKx` where `x` is the group index for the selected pin range. If more than one range is selected, then multiple `PCMSKx` should be defined. For more information about the values for that register refer to the datasheet at section "Pin Change Mask Register ...".
 * To activate interrupts use `sei()` and to deactivate them use `cli()`.
 * To handle events from PCINTx, use the following function `ISR(PCINTy_vect){...}` where `y` is the group index of the selected range pins.
 
-#### Example of external interrputs
+### Example of external interrputs
 Example for using external interrupts can be found in the section [Examples](#examples)
 
-### Timer
-#### Introduction
+## Timer
+### Introduction
 The ATmega328p has two 8-bit timers and one 16-bit timer. The 8-bit timers counts up to 255, and the 16-bit 
 timer counts up to 65,536.
 
-#### Timer 0 (TC0 8-bit)
+### Timer 0 (TC0 8-bit)
 **Register**: TCCR0A  
 **Name**: Timer/Counter 0 Control Register A  
 **Datasheet**: 19.9.1. TC0 Control Register A  
@@ -409,7 +661,7 @@ timer counts up to 65,536.
 |  7   |   1   |   1   |   1   |     Fast PWM       | OCRA |      BOTTOM        |      TOP        |
 +------+-------+-------+-------+--------------------+------+--------------------+-----------------+
 ```
-##### Modes (19.7 Modes of Operation)
+#### Modes (19.7 Modes of Operation)
 **Normal**: The counter simply overruns when it passes its 8-bit value and then restarts from the bottom.  
 **CTC mode**: The counter is cleared (reset to 0)  when the counter value (TCNT0) matches the OCR0A.
 
@@ -489,7 +741,7 @@ and from the C program keep a counter that will determine when 1 second has pass
 +--------+--------------------------+-------------------------------------------------------+
 ```
 
-#### Timer 1 (TC1 16-bit)
+### Timer 1 (TC1 16-bit)
 **Register**: TCCR1A  
 **Name**: Timer/Counter 1 Control Register A  
 **Datasheet**: 20.14.1. TC1 Control Register A  
@@ -568,7 +820,7 @@ and from the C program keep a counter that will determine when 1 second has pass
 +------+------+------+--------------------------------------------------------+
 ```
 
-#### Timer 2 (TC0 8-bit)
+### Timer 2 (TC0 8-bit)
 **Register**: TCCR2A  
 **Name**: Timer/Counter 2 Control Register A  
 **Datasheet**: 22.11.1. TC2 Control Register A  
@@ -597,7 +849,7 @@ and from the C program keep a counter that will determine when 1 second has pass
 |  7   |   1   |   1   |   1   |     Fast PWM       | OCRA |      BOTTOM        |      TOP        |
 +------+-------+-------+-------+--------------------+------+--------------------+-----------------+
 ```
-##### Modes (22.7 Modes of Operation)
+#### Modes (22.7 Modes of Operation)
 Refer to this section under the Timer 0 (above)
 
 ---
@@ -668,11 +920,11 @@ and when there is a match an Output Compare interrupt occures.
 +--------+--------------------------+-------------------------------------------------------+
 ```
 
-### Examples
+## Examples
 Some example files has been provided for further explanation
 * <a href="examples">Example directory</a>
 
-### Contributing
+## Contributing
 * Edit README.md
 * Add your changes
 * Write description of your changes in the `Commit changes` form
@@ -680,8 +932,8 @@ Some example files has been provided for further explanation
 * Specify a name for your commit branch
 * Click on "Propose file change" and then on "Create pull request"
 
-### Resources
-#### Websites
+## Resources
+### Websites
 * https://www.sparkfun.com/
 * https://aaroneiche.com/2016/11/06/programming-avrs-using-a-usbasp-on-a-mac/
 * http://www.avr-tutorials.com/digital/about-avr-8-bit-microcontrollers-digital-io-ports
@@ -689,7 +941,7 @@ Some example files has been provided for further explanation
 * http://treehouseprojects.ca/fusebits/
 * http://www.instructables.com/id/How-to-change-fuse-bits-of-AVR-Atmega328p-8bit-mic/
 
-#### YouTube
+### YouTube
 * NewbieHack - Microcontroller Tutorial - A Beginners, by Patrick Hood-Daniel
   * https://www.youtube.com/playlist?list=PLE72E4CFE73BD1DE1
 
