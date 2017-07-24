@@ -1,6 +1,8 @@
 # AVR Cheat Sheet 
 
-*The Following Cheat Sheet is built based on the ATmega328p, but other AVR microcontroller should follow similar steps.*
+*The Following Cheat Sheet is built based on the ATmega328p, but other AVR microcontroller should follow similar steps.
+Also note that this cheat sheet is just for reference. Therefore always refer to the original datasheet
+for complete information.*
 
 ## Table of Contents
 
