@@ -328,7 +328,104 @@ Example for using external interrupts can be found in the section [Examples](#ex
 
 ### Timer
 #### Introduction
-The ATmega328p 
+The ATmega328p has two 8-bit timers and one 16-bit timer. The 8-bit timers counts up to 255, and the 16-bit 
+timer counts up to 65,536.
+
+#### TTCR0A
+**TCCR0A **: Timer/Counter 0 Control Register A  
+**Datasheet**: 19.9.1. TC0 Control Register A  
+**Description**: Set the timer mode.  
+**Value**:   
+```
++------+-------+-------+-------+--------------------+------+--------------------+-----------------+
+| Mode | WGM02 | WGM01 | WGM00 |    Timer/Counter   | TOP  | Update of OCR0x at | TOV Flag Set on |
+|      |       |       |       |  Mode of Operation |      |                    |                 |
++------+-------+-------+-------+--------------------+------+--------------------+-----------------+
+|  0   |   0   |   0   |   0   |       Normal       | 0xFF |     Immediate      |      MAX        |
++------+-------+-------+-------+--------------------+------+--------------------+-----------------+
+|  1   |   0   |   0   |   1   | PWM, Phase Correct | 0xFF |        TOP         |     BOTTOM      |
++------+-------+-------+-------+--------------------+------+--------------------+-----------------+
+|  2   |   0   |   1   |   0   | CTC (Clear Timer   | OCRA |     Immediate      |      MAX        |
+|      |       |       |       | on Compare Match)  |      |                    |                 |
++------+-------+-------+-------+--------------------+------+--------------------+-----------------+
+|  3   |   0   |   1   |   1   |     Fast PWM       | 0xFF |      BOTTOM        |      MAX        |
++------+-------+-------+-------+--------------------+------+--------------------+-----------------+
+|  4   |   1   |   0   |   0   |     Reserved       |  -   |         -          |       -         |
++------+-------+-------+-------+--------------------+------+--------------------+-----------------+
+|  5   |   1   |   0   |   1   | PWM, Phase Correct | OCRA |        TOP         |     BOTTOM      |
++------+-------+-------+-------+--------------------+------+--------------------+-----------------+
+|  6   |   1   |   1   |   0   |     Reserved       |  -   |         -          |       -         |
++------+-------+-------+-------+--------------------+------+--------------------+-----------------+
+|  7   |   1   |   1   |   1   |     Fast PWM       | OCRA |      BOTTOM        |      TOP        |
++------+-------+-------+-------+--------------------+------+--------------------+-----------------+
+```
+##### Modes (19.7 Modes of Operation)
+**Normal**: The counter simply overruns when it passes its 8-bit value and then restarts from the bottom.  
+**CTC mode**: The counter is cleared (reset to 0)  when the counter value (TCNT0) matches the OCR0A.
+
+
+#### TTCR0B
+**Name**: Timer/Counter 0 Control Register B  
+**Datasheet**: 19.9.2. TC0 Control Register B  
+**Description**: Prescaler allows slowing down the timer by dividing the timer clock frequency by 1, 8, 64, etc...  
+**Value**:  
+```
++------+------+------+----------------------------------------------------- --+
+| CA02 | CA01 | CS00 | Description                                            |
++------+------+------+----------------------------------------------------- --+
+|   0  |   0  |   0  | No clock source (Timer/Counter stopped)                |
++------+------+------+----------------------------------------------------- --+
+|   0  |   0  |   1  | clk/1 (No prescaling)                                  |
++------+------+------+----------------------------------------------------- --+
+|   0  |   1  |   0  | clk/8 (From prescaler)                                 |
++------+------+------+----------------------------------------------------- --+
+|   0  |   1  |   1  | clk/64 (From prescaler)                                |
++------+------+------+----------------------------------------------------- --+
+|   1  |   0  |   0  | clk/256 (From prescaler)                               |
++------+------+------+----------------------------------------------------- --+
+|   1  |   0  |   1  | clk/1024 (From prescaler)                              |
++------+------+------+----------------------------------------------------- --+
+|   1  |   1  |   0  | External clock source on T0 pin. Clock on falling edge |
++------+------+------+----------------------------------------------------- --+
+|   1  |   1  |   1  | External clock source on T0 pin. Clock on rising edge  |
++------+------+------+--------------------------------------------------------+
+```
+
+#### OCR0A
+**Name**: Timer/Counter 0 Output Compare Register A  
+**Datasheet**: 19.9.6. TC0 Output Compare Register A  
+**Description**: This register contains an 8-bit value that is continuously compared with the counter value, 
+and when there is a match
+an Output Compare interrupt occures.  
+**Value**: It is common to calculate this value using an online timer calculator like 
+http://eleccelerator.com/avr-timer-calculator/.
+For example, given an ATmega328p with a clock of 1Mhz. Assume the timer that will be active is of 8-bits. 
+The prescale can be set to Clk/1024 to work with the time in a flexible way (check above for more details). 
+Finally, consider that the timer should interrupt every 1 second. Put all those information in the calculator
+in order to generate the total timer ticks required in order to get 1 second, that is the value for OCR0A. 
+Please note that the value provided by the calculator might be greater than 255 (active timer is only 8-bit).
+If that is the case, then try setting the desired time to something small (e.g. 0.1s, 0.01s, etc...), 
+and from the C program keep a counter that will determine when 1 second has passed.
+
+#### TIMSK0
+**Name**: Timer/Counter 0 Interrupt Mask Register  
+**Datasheet**: 19.9.3. TC0 Interrupt Mask Register  
+**Description**: Enables the logic when an interrupt should occur.  
+**Value**: 
+```
++--------+--------------------------+-------------------------------------------------------+
+| Value  | Name                     | Description                                           |
++--------+--------------------------+-------------------------------------------------------+
+| OCIE0B | Output Compare B         | Execute interrupt if timer value matches OCIE0B value |
+|        | Match Interrupt Enable   |                                                       |
++--------+--------------------------+-------------------------------------------------------+
+| OCIE0A | Output Compare A         | Execute interrupt if timer value matches OCIE0A value |
+|        | Match Interrupt Enable   |                                                       |
++--------+--------------------------+-------------------------------------------------------+
+| TOIE0  | Timer/Counter0, Overflow | Execute interrupt if timer value overflows e.g. 255+1 |
+|        | Interrupt Enable         |                                                       |
++--------+--------------------------+-------------------------------------------------------+
+```
 
 ### Examples
 Some example files has been provided for further explanation
