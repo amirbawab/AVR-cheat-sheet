@@ -249,7 +249,9 @@ Pin x register allows reading the values on the pins with "input" direction. For
 ATmega328p has three fuse bytes composed of 8 fuse bits each, responsible for the behavior of the chip. The bits are programmable and nonvolatile (the fuse bits programmed dont change their values the next time the chip is active). Writing 1 into a fuse bit sets it to unprogrammed and 0 sets it to programmed.
 
 #### Low fuse byte
-The low fuse byte enables controlling the speed, start up time and the source of the clock. Furthermore, it allows exposing the system clock output on PORTB0. Refer to [datasheet](#datasheet) at section "Clock Output Buffer".
+**Description**: The low fuse byte enables controlling the speed, start up time and the source of the clock. Furthermore, it allows exposing the system clock output on PORTB0. Refer to [datasheet](#datasheet) at section "Clock Output Buffer".  
+**Datasheet**: Table 31-7. Fuse Low Byte  
+**Table**:
 ```
 +---------------+---------+-------------------------+------------------+-------------------------------------+
 | Low Fuse Byte | Bit No. | Description             | Default Value    | Comments                            |
@@ -275,7 +277,9 @@ The low fuse byte enables controlling the speed, start up time and the source of
 ```
 
 #### High fuse byte
-The high fuse byte is responsible for various type of configuration.
+**Description**: The high fuse byte is responsible for various type of configuration.  
+**Datasheet**: Table 31-6. Fuse High Byte  
+**Table**:  
 ```
 +----------------+---------+----------------------------+------------------+-------------------------------------+
 | High Fuse Byte | Bit No. | Description                | Default Value    | Comments                            |
@@ -307,7 +311,9 @@ The high fuse byte is responsible for various type of configuration.
 ```
 
 #### Extended fuse byte
-If the ATmega chips is offered a poor voltage, it can become unstable and possibly misbehave. Therefore, the extended fuse byte allows setting a BOD (Brown-Out Detector) threshold voltage determining if the chip should stay active or should reset.
+**Description**: If the ATmega chips is offered a poor voltage, it can become unstable and possibly misbehave. Therefore, the extended fuse byte allows setting a BOD (Brown-Out Detector) threshold voltage determining if the chip should stay active or should reset.  
+**Datasheet**: Table 31-5. Extended Fuse Byte for ATmega328/P  
+**Table**:  
 ```
 +--------------------+---------+----------------------------+------------------+-------------------------------------+
 | Extended Fuse Byte | Bit No. | Description                | Default Value    | Comments                            |
