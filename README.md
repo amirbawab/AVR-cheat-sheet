@@ -332,7 +332,7 @@ The ATmega328p has two 8-bit timers and one 16-bit timer. The 8-bit timers count
 timer counts up to 65,536.
 
 #### Timer 0 (TC0 8-bit)
-##### TTCR0A
+**Register**: TTCR0A  
 **Name**: Timer/Counter 0 Control Register A  
 **Datasheet**: 19.9.1. TC0 Control Register A  
 **Description**: Set the timer mode.  
@@ -360,12 +360,13 @@ timer counts up to 65,536.
 |  7   |   1   |   1   |   1   |     Fast PWM       | OCRA |      BOTTOM        |      TOP        |
 +------+-------+-------+-------+--------------------+------+--------------------+-----------------+
 ```
-###### Modes (19.7 Modes of Operation)
+##### Modes (19.7 Modes of Operation)
 **Normal**: The counter simply overruns when it passes its 8-bit value and then restarts from the bottom.  
 **CTC mode**: The counter is cleared (reset to 0)  when the counter value (TCNT0) matches the OCR0A.
 
+---
 
-##### TTCR0B
+**Register**: TTCR0B
 **Name**: Timer/Counter 0 Control Register B  
 **Datasheet**: 19.9.2. TC0 Control Register B  
 **Description**: Prescaler allows slowing down the timer by dividing the timer clock frequency by 1, 8, 64, etc...  
@@ -392,7 +393,9 @@ timer counts up to 65,536.
 +------+------+------+--------------------------------------------------------+
 ```
 
-##### OCR0A
+---
+
+**Register**: OCR0A
 **Name**: Timer/Counter 0 Output Compare Register A  
 **Datasheet**: 19.9.6. TC0 Output Compare Register A  
 **Description**: This register contains an 8-bit value that is continuously compared with the counter value, 
@@ -408,7 +411,9 @@ Please note that the value provided by the calculator might be greater than 255 
 If that is the case, then try setting the desired time to something small (e.g. 0.1s, 0.01s, etc...), 
 and from the C program keep a counter that will determine when 1 second has passed.
 
-##### TIMSK0
+---
+
+**Register**: TIMSK0
 **Name**: Timer/Counter 0 Interrupt Mask Register  
 **Datasheet**: 19.9.3. TC0 Interrupt Mask Register  
 **Description**: Enables the logic when an interrupt should occur.  
@@ -429,7 +434,7 @@ and from the C program keep a counter that will determine when 1 second has pass
 ```
 
 #### Timer 1 (TC1 16-bit)
-##### TCCR1A
+**Register**: TCCR1A
 **Name**: Timer/Counter 1 Control Register A  
 **Datasheet**: 20.14.1. TC1 Control Register A  
 **Description**: Set the timer mode.  
