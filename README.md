@@ -366,7 +366,7 @@ timer counts up to 65,536.
 
 ---
 
-**Register**: TTCR0B
+**Register**: TTCR0B  
 **Name**: Timer/Counter 0 Control Register B  
 **Datasheet**: 19.9.2. TC0 Control Register B  
 **Description**: Prescaler allows slowing down the timer by dividing the timer clock frequency by 1, 8, 64, etc...  
@@ -395,7 +395,7 @@ timer counts up to 65,536.
 
 ---
 
-**Register**: OCR0A
+**Register**: OCR0A  
 **Name**: Timer/Counter 0 Output Compare Register A  
 **Datasheet**: 19.9.6. TC0 Output Compare Register A  
 **Description**: This register contains an 8-bit value that is continuously compared with the counter value, 
@@ -413,7 +413,7 @@ and from the C program keep a counter that will determine when 1 second has pass
 
 ---
 
-**Register**: TIMSK0
+**Register**: TIMSK0  
 **Name**: Timer/Counter 0 Interrupt Mask Register  
 **Datasheet**: 19.9.3. TC0 Interrupt Mask Register  
 **Description**: Enables the logic when an interrupt should occur.  
@@ -434,7 +434,7 @@ and from the C program keep a counter that will determine when 1 second has pass
 ```
 
 #### Timer 1 (TC1 16-bit)
-**Register**: TCCR1A
+**Register**: TCCR1A  
 **Name**: Timer/Counter 1 Control Register A  
 **Datasheet**: 20.14.1. TC1 Control Register A  
 **Description**: Set the timer mode.  
