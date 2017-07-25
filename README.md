@@ -617,24 +617,184 @@ Example for using internal and external clock source can be found in the section
 
 ## External interrupts
 ### Difference between INTx and PCINTx
-* There are only few INTx pins but there are a lot more PCINTx pins.
-* Each INTx pin have its own interrupt vector making it simple for the developer to listen for an event on that specific pin. On the other hand, a PCINTx pin shares an interrupt vector with several others, so listening for an event on that specific pin requires additional steps in order to mask out the other PCINTx pins in the same vector. To know which PCINTx pins share the same interrupt vector, refer to you AVR datashete at section "EXINT - External Interrupts".
-* INTx can report events under several situations (For ATmega328p: INT0:[low, any] and INT1:[falling, rising]). PCINTx report events on any change.
-  * Note that as of revision B of the ATmega328p datasheet, there is a typo in the Interrupt Sense Control 0 and 1 tables. The fix is: ISC00 and ISC01 are for INT0, and ISC10 and ISC11 are for INT1.
+* There are only two INTx (INT0 and INT1) pins but there are 23 PCINTx pins.
+* Each of INT0 and INT1 pins has its own interrupt vector making it simple for the developer to listen for an event on that specific pin. On the other hand, a PCINTx pin shares an interrupt vector with several others, so listening for an event on that specific pin requires additional steps in order to mask out the other PCINTx pins in the same vector. 
+* INTx can report events under four situations: low, any, falling, rising. PCINTx report events on one situation: any.
 
 ### Configure INTx
-* In general, the Data Direction value (DDxn) for INTx is set to "input", and the port value (PORTxn) is set to high (enable pull-up resitor). However, setting the Data Direction for INTx to "output" will still trigger an event.
-* As explained above, the INTx can report event on different degrees. To specify this degree level, refer to the datasheet at section "External Interrupt Control Register A" in order to set the value for `EICRA`.
-* The ATmega328p has two INTx pins (INT0 and INT1). To specify the used one(s), set the value for `EIMSK` by checking the options in the datasheet at section "External Interrupt Mask Register".
+**Register**: DDRx  
+**Name**: Data Direction Register x  
+**Datasheet**: Refer to [DDRx](#ddrx)  
+**Description**: Refer to [DDRx](#ddrx)  
+**Value**: In general, the Data Direction value (DDxn) for INTx is set to "input", and the port value (PORTxn) is set to high (enable pull-up resitor). However, setting the Data Direction for INTx to "output" will still trigger an event.
+
+---
+
+**Register**: EICRA  
+**Name**: External Interrupt Control Register A  
+**Datasheet**: 17.2.1. External Interrupt Control Register A  
+**Description**: Defines when an interrupt event is reported.  
+**Value for INT0**:
+```
++-------+-------+------------------------------------------------------------+
+| ISC01 | ISC00 | Description                                                |
++-------+-------+------------------------------------------------------------+
+|   0   |   0   | The low level of INT0 generates an interrput request.      |
++-------+-------+------------------------------------------------------------+
+|   0   |   1   | Any logical change on INT0 generates an interrupt request. |
++-------+-------+------------------------------------------------------------+
+|   1   |   0   | The falling edge of INT0 generates an interrupt request.   |
++-------+-------+------------------------------------------------------------+
+|   1   |   1   | The rising edge of INT0 generates an interrupt request.    |
++-------+-------+------------------------------------------------------------+
+```
+
+**Value for INT1**:
+```
++-------+-------+------------------------------------------------------------+
+| ISC11 | ISC10 | Description                                                |
++-------+-------+------------------------------------------------------------+
+|   0   |   0   | The low level of INT0 generates an interrput request.      |
++-------+-------+------------------------------------------------------------+
+|   0   |   1   | Any logical change on INT0 generates an interrupt request. |
++-------+-------+------------------------------------------------------------+
+|   1   |   0   | The falling edge of INT0 generates an interrupt request.   |
++-------+-------+------------------------------------------------------------+
+|   1   |   1   | The rising edge of INT0 generates an interrupt request.    |
++-------+-------+------------------------------------------------------------+
+```
+
+---
+
+**Register**: EIMSK  
+**Name**: External Interrupt Mask Register  
+**Datasheet**: 17.2.2. External Interrupt Mask Register  
+**Description**: For each of INT0 and INT1 pins, Write 1 to enable interrupt and 0 to disable interrupt.
+**Value**: 
+```
++-------+---------------------------+
+| Value | Description               |
++-------+---------------------------+
+| INT0  | INT0 is enabled           |
++-------+---------------------------+
+| INT1  | INT1 is enabled           |
++-------+---------------------------+
+```
+
+---
+
+**Register**: EIFR  
+**Name**: External Interrupt Flag Register  
+**Datasheet**: 17.2.3. External Interrupt Flag Register  
+**Description**: When an edge or logic change on the INTx pin triggers an interrupt request, INTFx will be set. A flag is cleared when the interrupt routine is executed. Alternatively, a flag can be cleared by writing '1' to it. This flag is always cleared when INTx is configured as a level interrupt.  
+**Value**:
+```
++-------+-----------------+
+| Value | Description     |
++-------+-----------------+
+| INT0  | Clear INT0 flag |
++-------+-----------------+
+| INT1  | Clear INT1 flag |
++-------+-----------------+
+```
+
+---
+
 * To activate interrupts use `sei()` and to deactivate them use `cli()`.
-* To handle events from INTx, use the following function `ISR(INTx_vect){...}`
+* To handle events from `INT0`, use the following function `ISR(INT0_vect){...}`. Same for `INT1`.
 
 ### Configure PCINTx
-* In general, the Data Direction value (DDxn) for PCINTx is set to "input", and the port value (PORTxn) is set to high (enable pull-up resitor). However, setting the Data Direction for PCINTx to "output" will still trigger an event.
-* Set the range of pins that will cause an interrupt. This can be done by setting the value for the `PCICR` to the corresponding range(s). Details about setting this register can be found in the datasheet at section "Pin Change Interrupt Control Register".
-* In the selected ranges, mask out the pins that will not provide any interrupts by setting the value for `PCMSKx` where `x` is the group index for the selected pin range. If more than one range is selected, then multiple `PCMSKx` should be defined. For more information about the values for that register refer to the datasheet at section "Pin Change Mask Register ...".
+**Register**: DDRx  
+**Name**: Data Direction Register x  
+**Datasheet**: Refer to [DDRx](#ddrx)  
+**Description**: Refer to [DDRx](#ddrx)  
+**Value**: In general, the Data Direction value (DDxn) for PCINTx is set to "input", and the port value (PORTxn) is set to high (enable pull-up resitor). However, setting the Data Direction for PCINTx to "output" will still trigger an event.
+
+---
+
+**Register**: PCICR  
+**Name**: Pin Change Interrupt Control Register  
+**Datasheet**: 17.2.4. Pin Change Interrupt Control Register  
+**Description**: The active range(s) of pins that can cause an interrupt.  
+**Value**:
+```
++-------+--------------------------------------------------------------------+
+| Value | Description                                                        |
++-------+--------------------------------------------------------------------+
+| PCIE2 | Any change on any enabled PCINT[23:16] pin will cause an interrupt |
++-------+--------------------------------------------------------------------+
+| PCIE1 | Any change on any enabled PCINT[14:8] pin will cause an interrupt  |
++-------+--------------------------------------------------------------------+
+| PCIE0 | Any change on any enabled PCINT[7:0] pin will cause an interrput   |
++-------+--------------------------------------------------------------------+
+```
+
+---
+
+**Register**: PCIFR  
+**Name**: Pin Change Interrupt Flag Register  
+**Datasheet**: 17.2.5. Pin Change Interrupt Flag Register  
+**Description**: When a logic change on any PCINT pin within the same range x triggers an interrupt request, PCIFx will be set. A flag is cleared when the interrupt routine is executed. Alternatively, a flag can be cleared by writing '1' to it.  
+**Value**: 
+```
++-------+------------------------------------+
+| Value | Description                        |
++-------+------------------------------------+
+| PCIF2 | Write 1 to clear PCINT[23:16] flag |
++-------+------------------------------------+
+| PCIF1 | Write 1 to clear PCINT[14:8] flag  |
++-------+------------------------------------+
+| PCIF0 | Write 1 to clear PCINT[7:0] flag   |
++-------+------------------------------------+
+```
+
+---
+
+**Register**: PCMSK2  
+**Name**: Pin Change Mask Register 2  
+**Datasheet**: 17.2.6. Pin Change Mask Register 2
+**Description**: For each of PCINT[23:16] pins, write 1 to enable pin change interrupt and 0 to disable pin change interrupt.
+**Value**: 
+```
++--------------+------------------------------------------+
+| Value        | Description                              |
++--------------+------------------------------------------+
+| PCINT[23:16] | Write 1 to PCINT[23:16] pin to enable it |
++--------------+------------------------------------------+
+```
+
+---
+
+**Register**: PCMSK1  
+**Name**: Pin Change Mask Register 1  
+**Datasheet**: 17.2.7. Pin Change Mask Register 1
+**Description**: For each of PCINT[14:8] pins, write 1 to enable pin change interrupt and 0 to disable pin change interrupt.
+**Value**: 
+```
++--------------+------------------------------------------+
+| Value        | Description                              |
++--------------+------------------------------------------+
+| PCINT[14:8]  | Write 1 to PCINT[14:8] pin to enable it  |
++--------------+------------------------------------------+
+```
+
+---
+
+**Register**: PCMSK0  
+**Name**: Pin Change Mask Register 0  
+**Datasheet**: 17.2.8. Pin Change Mask Register 0
+**Description**: For each of PCINT[7:0] pins, write 1 to enable pin change interrupt and 0 to disable pin change interrupt.
+**Value**: 
+```
++--------------+------------------------------------------+
+| Value        | Description                              |
++--------------+------------------------------------------+
+| PCINT[7:0]   | Write 1 to PCINT[7:0] pin to enable it   |
++--------------+------------------------------------------+
+```
+
 * To activate interrupts use `sei()` and to deactivate them use `cli()`.
-* To handle events from PCINTx, use the following function `ISR(PCINTy_vect){...}` where `y` is the group index of the selected range pins.
+* To handle events from PCINT[7:0], use the following function `ISR(PCINT0_vect){...}`. Same for PCINT[14:8] and PCINT[23:16] use respectively `ISR(PCINT1_vect){...}` and `ISR(PCINT2_vect){...}`.
 
 ### Example of external interrputs
 Example for using external interrupts can be found in the section [Examples](#examples)
