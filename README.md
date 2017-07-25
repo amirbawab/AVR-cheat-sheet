@@ -68,6 +68,7 @@ for complete and more accurate information.*
 ## Datasheet
 ### ATmega328p
 PDF from <a href="http://www.atmel.com/Images/Atmel-42735-8-bit-AVR-Microcontroller-ATmega328-328P_Datasheet.pdf">Atmel</a>
+  * LPT: Check the **Register Description** for your topic. For example, if you want to learn about "External Interrupts", visit the **Register Description** under the **EXINT - External Interrupts** chapter.
 
 ## Packages
 ### Arch linux
@@ -1019,7 +1020,9 @@ on the timing of the interrupt.
 +------+------+------+--------------------------------------------------------+
 ```
 
-### Timer 2 (TC0 8-bit)
+#### TODO: To continue other registers
+
+### Timer 2 (TC2 8-bit)
 **Register**: TCCR2A  
 **Name**: Timer/Counter 2 Control Register A  
 **Datasheet**: 22.11.1. TC2 Control Register A  
@@ -1117,6 +1120,10 @@ and when there is a match an Output Compare interrupt occures.
 |        | Interrupt Enable         |                                                       |
 +--------+--------------------------+-------------------------------------------------------+
 ```
+
+---
+
+#### TODO: To continue other registers
 
 ## Examples
 Some example files has been provided for further explanation
