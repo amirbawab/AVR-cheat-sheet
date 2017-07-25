@@ -2,7 +2,7 @@
 
 *The Following Cheat Sheet is built based on the ATmega328p, but other AVR microcontroller should follow similar steps.
 Also note that this cheat sheet is just for reference. Therefore always refer to the original datasheet
-for complete information.*
+for complete and more accurate information.*
 
 ## Table of Contents
 
@@ -752,8 +752,8 @@ Example for using internal and external clock source can be found in the section
 
 **Register**: PCMSK2  
 **Name**: Pin Change Mask Register 2  
-**Datasheet**: 17.2.6. Pin Change Mask Register 2
-**Description**: For each of PCINT[23:16] pins, write 1 to enable pin change interrupt and 0 to disable pin change interrupt.
+**Datasheet**: 17.2.6. Pin Change Mask Register 2  
+**Description**: For each of PCINT[23:16] pins, write 1 to enable pin change interrupt and 0 to disable pin change interrupt.  
 **Value**: 
 ```
 +--------------+------------------------------------------+
@@ -767,8 +767,8 @@ Example for using internal and external clock source can be found in the section
 
 **Register**: PCMSK1  
 **Name**: Pin Change Mask Register 1  
-**Datasheet**: 17.2.7. Pin Change Mask Register 1
-**Description**: For each of PCINT[14:8] pins, write 1 to enable pin change interrupt and 0 to disable pin change interrupt.
+**Datasheet**: 17.2.7. Pin Change Mask Register 1  
+**Description**: For each of PCINT[14:8] pins, write 1 to enable pin change interrupt and 0 to disable pin change interrupt.  
 **Value**: 
 ```
 +--------------+------------------------------------------+
@@ -782,8 +782,8 @@ Example for using internal and external clock source can be found in the section
 
 **Register**: PCMSK0  
 **Name**: Pin Change Mask Register 0  
-**Datasheet**: 17.2.8. Pin Change Mask Register 0
-**Description**: For each of PCINT[7:0] pins, write 1 to enable pin change interrupt and 0 to disable pin change interrupt.
+**Datasheet**: 17.2.8. Pin Change Mask Register 0  
+**Description**: For each of PCINT[7:0] pins, write 1 to enable pin change interrupt and 0 to disable pin change interrupt.  
 **Value**: 
 ```
 +--------------+------------------------------------------+
@@ -876,7 +876,7 @@ http://eleccelerator.com/avr-timer-calculator/.
 For example, given an ATmega328p with a clock of 1Mhz. Assume the timer that will be active is of 8-bits. 
 The prescale can be set to Clk/1024 to work with the time in a flexible way (check above for more details). 
 Finally, consider that the timer should interrupt every 1 second. Put all those information in the calculator
-in order to generate the total timer ticks required in order to get 1 second, that is the value for OCR0A. 
+in order to generate the total timer ticks required in order to get 1 second, that is the value of that register. 
 Please note that the value provided by the calculator might be greater than 255 (active timer is only 8-bit).
 If that is the case, then try setting the desired time to something small (e.g. 0.1s, 0.01s, etc...), 
 and from the C program keep a counter that will determine when 1 second has passed.
@@ -886,8 +886,8 @@ and from the C program keep a counter that will determine when 1 second has pass
 **Register**: OCR0B  
 **Name**: Timer/Counter 0 Output Compare Register B  
 **Datasheet**: 19.9.7. TC0 Output Compare Register B  
-**Description**: Refer to OCR0A  
-**Value**: Refer to OCR0A  
+**Description**: Simlar to OCR0A. Refer to OCR0A  
+**Value**: Similar to OCR0A. Refer to OCR0A  
 
 ---
 
@@ -909,6 +909,35 @@ and from the C program keep a counter that will determine when 1 second has pass
 | TOIE0  | Timer/Counter0, Overflow | Execute interrupt if timer value overflows e.g. 255+1 |
 |        | Interrupt Enable         |                                                       |
 +--------+--------------------------+-------------------------------------------------------+
+```
+
+---
+
+**Register**: TCNT0  
+**Name**: Timer/Counter 0 Counter Value Register  
+**Datasheet**: 19.9.5. TC0 Counter Value Register  
+**Description**: Allow manipulate or access the timer counter value. Changing the timer will have consequences
+on the timing of the interrupt.  
+**Value**: The 8-bit value in binary or hex representation.
+
+---
+
+**Register**: TIFR0  
+**Name**: Timer/Counter 0 Interrupt Flag Register  
+**Datasheet**: 19.9.8. TC0 Interrupt Flag Register  
+**Description**: The value of the register reflect when an interrupt occurs.  
+**Description**: When an interrupt occurs, TIFR0 reflects the change. A flag is cleared when executing the interrupt handling vector.. Alternatively, a flag can be cleared by writing '1' to it.  
+**Value**:
+```
++-------+-----------------------------------------------------+
+| Value | Description                                         |
++-------+-----------------------------------------------------+
+| OCF0B | Read/Write interrupt flag when Timer matches OCR0B. |
++-------+-----------------------------------------------------+
+| OCF0A | Read/Write interrupt flag when Timer matches OCR0A  |
++-------+-----------------------------------------------------+
+| TOV0  | Read/Write interrupt flag when Timer overflows      |
++-------+-----------------------------------------------------+
 ```
 
 ### Timer 1 (TC1 16-bit)
