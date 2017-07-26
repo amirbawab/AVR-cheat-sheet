@@ -4,20 +4,28 @@
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
-int extraTime = 0;
+
+// Every 4 times 25ms is equal to 1s
+int ms25 = 0;
 
 int main(void){
 
+    // Set pin PC5 as output for the LED
     DDRC = (1 << DDC5);
 
-    TCCR0A = (1 << WGM01); //Set CTC Bit
+    // Set timer mode to CTC
+    TCCR0A = (1 << WGM01);
 
-    OCR0A = 195;
+    // Calculate the equivalence of 0.25s using
+    // an online AVR calculator
+    OCR0A = 244;
     TIMSK0 = (1 << OCIE0A);
 
+    // Enable interrupts
     sei();
 
-    TCCR0B = (1 << CS02) | (1 << CS00); //start at 1024 prescalar
+    // Set prescaler to 1024
+    TCCR0B = (1 << CS02) | (1 << CS00);
 
     while(1) {
     	// Do nothing
@@ -25,11 +33,17 @@ int main(void){
 }
 
 ISR(TIMER0_COMPA_vect) {
-    extraTime++;
 
-    if(extraTime > 100)
-    {
-        extraTime = 0;
+    // Increment 25ms timer
+    ms25++;
+
+    // If already 1 second
+    if(ms25 > 3) {
+
+        // Reset timer
+        ms25 = 0;
+
+        // Toggle LED
         PORTC ^= (1 << PORTC5);
     }
 }
