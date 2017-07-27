@@ -1198,7 +1198,7 @@ This device was tested on Ubuntu 16.04 and Arch Linux
 **Screen Attach**: `screen /dev/ttyUSB0 4800`. If `/dev/ttyUSB0` does not work, run `dmesg` to know the correct FTDI device file name. Also make sure the BAUD rate is the same as your ATmega328p program.  
 **Screen Detach**: `ctrl+a ctrl+d`  
 **Screen List**: `screen -list`  
-**Screen Resume**: `screen -r <id-from->`  
+**Screen Resume**: `screen -r <id-from-list>`  
 To send data, just attach to the FTDI device file and start typing.  
 To receive data, just attach to the FTDI device file and it should start printing on your console.  
 
