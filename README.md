@@ -1179,11 +1179,28 @@ unsigned char USART_Receive( void ) {
 }
 ```
 
-### FTDI
-<img src="images/ftdi.jpg" with="300"/>
-
 ### USART Example
 Refer to the [Example](#example) section.
+
+### FTDI
+#### SparkFun FTDI Basic Breakout - 5V
+This device was tested on Ubuntu 16.04 and Arch Linux  
+<img src="images/ftdi.jpg" width="300"/>
+
+### FTDI connection
+* Plug the FTDI device into your machine
+* Wire the TX (Transmit) of the FTDI to the RX (Receive) of the ATmega328p
+* Wire the RX of the FTDI to the TX of the ATmega328p
+
+### Send and Recieve data to/from AVR
+#### Arch Linux
+**Command**: `screen` or other from <a href="https://wiki.archlinux.org/index.php/working_with_the_serial_console">Arch Wiki</a>  
+**Screen Attach**: `screen /dev/ttyUSB0 4800`. If `/dev/ttyUSB0` does not work, run `dmesg` to know the correct FTDI device file name. Also make sure the BAUD rate is the same as your ATmega328p program.  
+**Screen Detach**: `ctrl+a ctrl+d`  
+**Screen List**: `screen -list`  
+**Screen Resume**: `screen -r <id-from->`  
+To send data, just attach to the FTDI device file and start typing.  
+To receive data, just attach to the FTDI device file and it should start printing on your console.  
 
 ## Examples
 Some example files has been provided for further explanation
