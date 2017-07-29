@@ -1212,6 +1212,14 @@ This device was tested on Ubuntu 16.04 and Arch Linux
 To send data, just attach to the FTDI device file and start typing.  
 To receive data, just attach to the FTDI device file and it should start printing on your console.  
 
+## PWM
+### Pins
+ATmega328p has 6 hardware PWM pins: OC0A, OC0B, OC1A, OC1B, OC2A and OC2B
+
+### PWM Example
+Refer to the [Example](#example) section.
+
+
 ## Examples
 Some example files has been provided for further explanation
 * <a href="examples">Example directory</a>
