@@ -30,7 +30,7 @@ int main(void) {
 		}
 	}
 
-	return(0);					// should never get here, this is to prevent a compiler warning
+	return 0;
 }
 
 
