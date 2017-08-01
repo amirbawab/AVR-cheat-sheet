@@ -1212,6 +1212,7 @@ This device was tested on Ubuntu 16.04 and Arch Linux
 **Screen Detach**: `ctrl+a ctrl+d`  
 **Screen List**: `screen -list`  
 **Screen Resume**: `screen -r <id-from-list>`  
+*Note: You might have to run `screen` as `sudo`*
 To send data, just attach to the FTDI device file and start typing.  
 To receive data, just attach to the FTDI device file and it should start printing on your console.  
 
