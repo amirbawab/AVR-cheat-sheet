@@ -48,6 +48,8 @@ for complete and more accurate information.*
         * [External Clock](#external-clock)
     * [Example of clock source](#example-of-clock-source)
 * [Interrupt vectors](#interrupt-vectors)
+    * [Vectors](#vectors)
+    * [Handle interrupts](#handle-interrupts)
 * [External interrupts](#external-interrupts)
     * [Difference between INTx and PCINTx](#difference-between-intx-and-pcintx)
     * [Configure INTx](#configure-intx)
@@ -635,8 +637,9 @@ External clock source, such as an external crystal oscillator, is sometimes impo
 Example for using internal and external clock source can be found in the section [Examples](#examples)
 
 ## Interrupt vectors
+### Vectors
 **Datasheet**: 16.1. Interrupt Vectors in ATmega328/P  
-**Description**: The folowing table represent the interrupts that can be handler.  
+**Description**: The folowing table represent the interrupts that can be handled.  
 ```
 +-----------------------+----------------------------------------------+
 | Source                | Interrupt definition                         |
@@ -695,7 +698,7 @@ Example for using internal and external clock source can be found in the section
 | SPM READY             | Store Program Memory Ready                   |
 +-----------------------+----------------------------------------------+
 ```
-
+### Handle interrupts
 To listen for those interrupts:
 * Include the interrupt header `#include <avr/interrupt.h>`
 * Enable interrupt `sei()`
