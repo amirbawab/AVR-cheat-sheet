@@ -9,6 +9,7 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
+// Check Cheat sheet for details about instruction
 void USART_Init(unsigned int ubrr) {
    UBRR0H = (unsigned char)(ubrr>>8);
    UBRR0L = (unsigned char)ubrr;
