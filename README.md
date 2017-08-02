@@ -629,6 +629,73 @@ External clock source, such as an external crystal oscillator, is sometimes impo
 ### Example of clock source
 Example for using internal and external clock source can be found in the section [Examples](#examples)
 
+## Interrupt vectors
+**Datasheet**: 16.1. Interrupt Vectors in ATmega328/P  
+**Description**: The folowing table represent the interrupts that can be handler.  
+```
++-----------------------+----------------------------------------------+
+| Source                | Interrupt definition                         |
++-----------------------+----------------------------------------------+
+| RESET                 | External Pin, Power-on Reset, Brown-out      |
+|                       | Reset and Watchdog System Reset              |
++-----------------------+----------------------------------------------+
+| INT0                  | External interrupt request 0                 |
++-----------------------+----------------------------------------------+
+| INT1                  | External interrupt request 1                 |
++-----------------------+----------------------------------------------+
+| PCINT0                | Pin change interrupt request 0               |
++-----------------------+----------------------------------------------+
+| PCINT1                | Pin change interrupt request 1               |
++-----------------------+----------------------------------------------+
+| PCINT2                | Pin change interrupt request 2               |
++-----------------------+----------------------------------------------+
+| WDT                   | Watchdog Time-out interrupt                  |
++-----------------------+----------------------------------------------+
+| TIMER2_COMPA          | Timer/Counter2 Compare Match A               |
++-----------------------+----------------------------------------------+
+| TIMER2_COMPB          | Timer/Counter2 Compare Match B               |
++-----------------------+----------------------------------------------+
+| TIMER2_OVF            | Timer/Counter2 Overflow                      |
++-----------------------+----------------------------------------------+
+| TIMER1_CAPT           | Timer/Counter1 Capture Event                 |
++-----------------------+----------------------------------------------+
+| TIMER1_COMPA          | Timer/Counter1 Compare Match A               |
++-----------------------+----------------------------------------------+
+| TIMER1_COMPB          | Timer/Counter1 Compare Match B               |
++-----------------------+----------------------------------------------+
+| TIMER1_OVF            | Timer/Counter1 Overflow                      |
++-----------------------+----------------------------------------------+
+| TIMER0_COMPA          | Timer/Counter0 Compare Match A               |
++-----------------------+----------------------------------------------+
+| TIMER0_COMPB          | Timer/Counter0 Compare Match B               |
++-----------------------+----------------------------------------------+
+| TIMER0_OVF            | Timer/Counter0 Overflow                      |
++-----------------------+----------------------------------------------+
+| SPI_STC               | SPI Serial Transfer Complete                 |
++-----------------------+----------------------------------------------+
+| USART_RX              | USART RX Complete                            |
++-----------------------+----------------------------------------------+
+| USART_UDRE            | USART Data Register Empty                    |
++-----------------------+----------------------------------------------+
+| USART_TX              | USART TX Complete                            |
++-----------------------+----------------------------------------------+
+| ADC                   | ADC Conversion Complete                      |
++-----------------------+----------------------------------------------+
+| EE READY              | EEPROM Ready                                 |
++-----------------------+----------------------------------------------+
+| ANALOG_COMP           | Analog Comparator                            |
++-----------------------+----------------------------------------------+
+| TWI                   | 2-wire Serial Interface (I2C)                |
++-----------------------+----------------------------------------------+
+| SPM READY             | Store Program Memory Ready                   |
++-----------------------+----------------------------------------------+
+```
+
+To listen for those interrupts:
+* Include the interrupt header `#include <avr/interrupt.h>`
+* Enable interrupt `sei()`
+* Handle interrupt `ISR({SOURCE}_vect){ ... }`. Check [External interrupts](#external-interrupts) and [USART](#usart) for examples.
+
 ## External interrupts
 ### Difference between INTx and PCINTx
 * There are only two INTx (INT0 and INT1) pins but there are 23 PCINTx pins.
