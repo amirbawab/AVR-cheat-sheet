@@ -47,6 +47,7 @@ for complete and more accurate information.*
         * [128kHz Internal Oscillator](#128khz-internal-oscillator)
         * [External Clock](#external-clock)
     * [Example of clock source](#example-of-clock-source)
+* [Interrupt vectors](#interrupt-vectors)
 * [External interrupts](#external-interrupts)
     * [Difference between INTx and PCINTx](#difference-between-intx-and-pcintx)
     * [Configure INTx](#configure-intx)
@@ -63,6 +64,9 @@ for complete and more accurate information.*
     * [USART Initialization](#usart-initialization)
     * [Sending Frames with 5 to 8 Data Bits](#sending-frames-with-5-to-8-data-bits)
     * [Receiving Frames with 5 to 8 Data Bits](#receiving-frames-with-5-to-8-data-bits)
+    * [Interrupt driven USART](#interrupt-driven-usart)
+        * [RX](#rx)
+        * [TX](#tx)
     * [USART Example](#usart-example)
     * [FTDI](#ftdi)
         * [SparkFun FTDI Basic Breakout - 5V](#sparkfun-ftdi-basic-breakout---5v)
@@ -77,6 +81,7 @@ for complete and more accurate information.*
 * [Resources](#resources)
     * [Websites](#websites)
     * [YouTube](#youtube)
+
 
 ## Datasheet
 ### ATmega328p
@@ -315,7 +320,7 @@ ATmega328p has three fuse bytes composed of 8 fuse bits each, responsible for th
 ```
 
 * To know how the CKSEL[3:0] and SUT[1:0] should be configured, check section [Clock sources](#clock-sources).
-* An example is provided in the [example](#example) section.
+* An example is provided in the [Examples](#examples) section.
 
 ### High fuse byte
 **Description**: The high fuse byte is responsible for various type of configuration.  
@@ -1294,7 +1299,7 @@ ISR(USART_TX_vect) {
 ```
 
 ### USART Example
-Refer to the [Example](#example) section.
+Refer to the [Example](#examples) section.
 
 ### FTDI
 #### SparkFun FTDI Basic Breakout - 5V
@@ -1322,7 +1327,7 @@ To receive data, just attach to the FTDI device file and it should start printin
 ATmega328p has 6 hardware PWM pins: OC0A, OC0B, OC1A, OC1B, OC2A and OC2B
 
 ### PWM Example
-Refer to the [Example](#example) section.
+Refer to the [Examples](#examples) section.
 
 
 ## Examples
