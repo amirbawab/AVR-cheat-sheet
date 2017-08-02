@@ -1192,6 +1192,40 @@ unsigned char USART_Receive( void ) {
 }
 ```
 
+### Interrupt driven USART
+#### RX
+```
+void USART_RX_int() {
+
+    // Enable RX interrupt
+    UCSR0B |= (1<<RXCIE0);
+
+    // Enable interrupt (if not already enabled)
+    sei();
+}
+
+ISR(USART_RX_vect) {
+    char c = USART_Receive();
+    ...
+}
+```
+
+#### TX
+```
+void USART_TX_int() {
+
+    // Enable TX interrupt
+    UCSR0B |= (1<<TXCIE0);
+
+    // Enable interrupt (if not already enabled)
+    sei();
+}
+
+ISR(USART_TX_vect) {
+    ...
+}
+```
+
 ### USART Example
 Refer to the [Example](#example) section.
 
