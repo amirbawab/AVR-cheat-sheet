@@ -1211,33 +1211,6 @@ and when there is a match an Output Compare interrupt occures.
 
 ---
 
-**Register**: UCSRnB  
-**Name**: USART Control and Status Register n B  
-**Datasheet**: 19.10.3 UCSRnB  
-**Description**: Enables interrupt for USART events  
-**Value**: 
-```
-+--------+--------------------------+-------------------------------------------------------+
-| Value  | Name                     | Description                                           |
-+--------+--------------------------+-------------------------------------------------------+
-| RXCIEn | RX Complete              | Enables interrupt on the RXCn flag                    |
-|        | Interrupt Enable n       |                                                       |
-+--------+--------------------------+-------------------------------------------------------+
-| TXCIEn | TX Complete              | Enables interrupt on the TXCn flag                    |
-|        | Interrupt Enable n       |                                                       |
-+--------+--------------------------+-------------------------------------------------------+
-| UDRIEn | USART Data Register Empty| Enables interrupt on the UDRen flag                   |
-|        | Interrupt Enable n       |                                                       |
-+--------+--------------------------+-------------------------------------------------------+
-| RXENn  | Receiver Enable n        | Enables USART receiver                                |
-|        |                          |                                                       |
-+--------+--------------------------+-------------------------------------------------------+
-| TXENn  | Transmitter Enable n     | Enables USART transmitter                             |
-|        | Interrupt Enable n       |                                                       |
-+--------+--------------------------+-------------------------------------------------------+
-| UCSZn2 | Character size n         | Combines with UCSZn1:0 bit in UCSRnC which sets       |
-|        |                          | the number of data bits                               |
-+--------+--------------------------+-------------------------------------------------------+
 #### TODO: To continue other registers
 
 ## USART
