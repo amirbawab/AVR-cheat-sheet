@@ -1238,6 +1238,10 @@ and when there is a match an Output Compare interrupt occures.
 | UCSZn2 | Character size n         | Combines with UCSZn1:0 bit in UCSRnC which sets       |
 |        |                          | the number of data bits                               |
 +--------+--------------------------+-------------------------------------------------------+
+```
+
+---
+
 #### TODO: To continue other registers
 
 ## USART
